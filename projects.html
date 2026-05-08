@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Projects — Jay Panchal · Flutter & Mobile App Developer</title>
+  <meta name="description" content="15+ production apps built by Jay Panchal — Flutter developer from Mumbai. 170K+ total downloads across ride-hailing, AgriTech, social, enterprise and lifestyle apps.">
+  <meta name="keywords" content="Jay Panchal projects, Flutter apps portfolio, Goa Taxi app, AmulAMCS app, AASAN dairy app, Flutter developer Mumbai apps">
+  <link rel="canonical" href="https://jay-panchal.dev/projects.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#080808;--bg2:#0e0e0e;--sur:#121212;--sur2:#181818;--sur3:#1e1e1e;
+      --bd:rgba(255,255,255,.07);--bd2:rgba(255,255,255,.12);
+      --cyan:#02BBE5;--cyan2:#018DB3;--cdim:rgba(2,187,229,.12);--cglow:rgba(2,187,229,.2);
+      --tx:#EEECE8;--tx2:rgba(238,236,232,.65);--tx3:rgba(238,236,232,.35);--tx4:rgba(238,236,232,.18);
+      --ff:'Syne',sans-serif;--fb:'DM Sans',sans-serif;--fm:'JetBrains Mono',monospace;
+      --r:14px;--rs:8px;--ease:cubic-bezier(.4,0,.2,1);
+    }
+    html{font-size:16px;overflow-x:hidden;scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--tx);font-family:var(--fb);overflow-x:hidden;cursor:none;line-height:1.6}
+    a{text-decoration:none;color:inherit}
+    ::-webkit-scrollbar{width:3px}
+    ::-webkit-scrollbar-track{background:var(--bg)}
+    ::-webkit-scrollbar-thumb{background:var(--cyan);border-radius:2px}
+
+    /* CURSOR */
+    #cr{position:fixed;width:36px;height:36px;border:1.5px solid rgba(2,187,229,.55);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s}
+    #cd{position:fixed;width:5px;height:5px;background:var(--cyan);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
+    body.ch #cr{width:50px;height:50px;background:var(--cdim)}
+
+    /* NAV */
+    #nav{position:sticky;top:0;z-index:500;background:rgba(8,8,8,.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--bd);padding:.9rem 0}
+    .nav-in{display:flex;align-items:center;justify-content:space-between;gap:2rem}
+    .nav-back{display:flex;align-items:center;gap:.6rem;font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--tx3);transition:color .2s}
+    .nav-back:hover{color:var(--cyan)}
+    .nav-logo{font-family:var(--ff);font-size:1rem;font-weight:800;letter-spacing:-.04em}
+    .nav-logo span{color:var(--cyan)}
+    .nav-count{font-family:var(--fm);font-size:.68rem;color:var(--tx3);background:var(--sur);border:1px solid var(--bd);padding:.25rem .7rem;border-radius:99px}
+
+    /* CONTAINER */
+    .wrap{max-width:1220px;margin:0 auto;padding:0 2rem}
+
+    /* PAGE HEADER */
+    .page-head{padding:4rem 0 3rem;border-bottom:1px solid var(--bd)}
+    .ph-tag{font-family:var(--fm);font-size:.65rem;font-weight:500;text-transform:uppercase;letter-spacing:.2em;color:var(--cyan);display:block;margin-bottom:.9rem}
+    .ph-tag::before{content:'// ';opacity:.5}
+    .ph-h1{font-family:var(--ff);font-size:clamp(2.5rem,6vw,5rem);font-weight:800;letter-spacing:-.06em;line-height:.95;margin-bottom:1rem}
+    .ph-sub{font-size:.97rem;color:var(--tx2);max-width:560px;line-height:1.7;margin-bottom:2rem}
+    .ph-stats{display:flex;flex-wrap:wrap;gap:1.5rem}
+    .ph-stat{display:flex;flex-direction:column;gap:.2rem}
+    .ph-stat-num{font-family:var(--ff);font-size:1.8rem;font-weight:800;letter-spacing:-.05em;line-height:1}
+    .ph-stat-num span{color:var(--cyan)}
+    .ph-stat-label{font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.15em;color:var(--tx3)}
+
+    /* FILTER TABS */
+    .filter-bar{padding:2rem 0 1.5rem;position:sticky;top:58px;z-index:100;background:var(--bg)}
+    .filter-bar::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:var(--bd)}
+    .filter-scroll{display:flex;gap:.5rem;overflow-x:auto;padding-bottom:.5rem;scrollbar-width:none}
+    .filter-scroll::-webkit-scrollbar{display:none}
+    .ftab{flex-shrink:0;padding:.45rem 1rem;border:1px solid var(--bd);border-radius:99px;font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--tx3);background:none;cursor:pointer;transition:all .2s;white-space:nowrap}
+    .ftab:hover{border-color:var(--bd2);color:var(--tx2)}
+    .ftab.active{background:var(--cyan);border-color:var(--cyan);color:#000}
+
+    /* GRID */
+    .app-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;padding:2.5rem 0 5rem}
+    @media(max-width:980px){.app-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:580px){.app-grid{grid-template-columns:1fr}}
+
+    /* APP CARD */
+    .app-card{background:var(--sur);border:1px solid var(--bd);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;transition:transform .28s var(--ease),border-color .28s,box-shadow .28s;cursor:pointer}
+    .app-card:hover{transform:translateY(-5px);border-color:rgba(2,187,229,.28);box-shadow:0 18px 55px rgba(0,0,0,.4),0 0 35px rgba(2,187,229,.07)}
+    .app-card.hidden{display:none}
+
+    /* CARD SCREENSHOT AREA */
+    .card-img{position:relative;height:200px;overflow:hidden;background:var(--sur2)}
+    .card-shot{width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .5s ease}
+    .app-card:hover .card-shot{transform:scale(1.04)}
+    .card-grad{position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.65) 100%);pointer-events:none}
+    .card-icon{position:absolute;bottom:.9rem;left:.9rem;width:44px;height:44px;border-radius:10px;border:2px solid rgba(255,255,255,.15);overflow:hidden;background:var(--sur3);flex-shrink:0}
+    .card-icon img{width:100%;height:100%;object-fit:cover}
+    .card-cat{position:absolute;top:.9rem;right:.9rem;font-size:.55rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;padding:.22rem .65rem;border-radius:99px;background:rgba(0,0,0,.55);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.8)}
+    .card-badge{position:absolute;bottom:.9rem;right:.9rem;font-size:.55rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:.2rem .6rem;border-radius:99px;background:var(--cyan);color:#000}
+    /* gradient fallback for no screenshot */
+    .card-img-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem}
+
+    /* CARD BODY */
+    .card-body{padding:1.2rem;display:flex;flex-direction:column;flex:1}
+    .card-title{font-family:var(--ff);font-size:1.05rem;font-weight:800;letter-spacing:-.03em;color:var(--tx);margin-bottom:.2rem}
+    .card-sub{font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--cyan);margin-bottom:.9rem}
+    .card-meta{display:flex;align-items:center;gap:1rem;margin-bottom:.8rem}
+    .card-installs{font-size:.72rem;color:var(--tx3);display:flex;align-items:center;gap:.35rem}
+    .card-installs i{color:var(--cyan);font-size:.7rem}
+    .card-rating{display:flex;align-items:center;gap:.25rem;font-size:.7rem;color:var(--tx3)}
+    .card-rating i{color:#f59e0b;font-size:.65rem}
+    .card-desc{font-size:.83rem;color:var(--tx2);line-height:1.6;margin-bottom:1rem;flex:1;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+    .card-tech{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:1rem}
+    .tech-c{font-size:.56rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;padding:.18rem .55rem;border-radius:99px;background:var(--sur3);border:1px solid var(--bd);color:var(--tx3)}
+    .card-links{display:flex;gap:.5rem;margin-top:auto}
+    .store-btn{display:inline-flex;align-items:center;gap:.45rem;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:.5rem .9rem;border-radius:99px;border:1px solid var(--bd2);color:var(--tx2);transition:all .2s;flex-shrink:0}
+    .store-btn:hover{border-color:var(--cyan);color:var(--cyan);background:var(--cdim)}
+    .store-btn.play{background:var(--cyan);border-color:var(--cyan);color:#000}
+    .store-btn.play:hover{background:var(--cyan2)}
+    .store-btn i{font-size:.75rem}
+    .store-btn.disabled{opacity:.35;pointer-events:none}
+    .card-company{font-size:.6rem;color:var(--tx4);text-transform:uppercase;letter-spacing:.1em;margin-top:.8rem;display:flex;align-items:center;gap:.4rem}
+    .card-company::before{content:'';display:block;width:4px;height:4px;border-radius:50%;background:var(--tx4);flex-shrink:0}
+
+    /* SPECIAL CARD (no screenshots) */
+    .special-banner{height:200px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.8rem;position:relative;overflow:hidden}
+    .special-banner::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(2,187,229,.15) 0%,transparent 70%)}
+
+    /* LIGHTBOX */
+    #lb{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.92);backdrop-filter:blur(20px);display:none;align-items:center;justify-content:center;padding:2rem}
+    #lb.open{display:flex}
+    .lb-inner{max-width:900px;width:100%;position:relative}
+    .lb-close{position:absolute;top:-3rem;right:0;background:none;border:1px solid var(--bd2);border-radius:50%;width:34px;height:34px;display:grid;place-items:center;color:var(--tx2);cursor:pointer;transition:all .2s}
+    .lb-close:hover{border-color:var(--cyan);color:var(--cyan)}
+    .lb-app-name{font-family:var(--ff);font-size:1.3rem;font-weight:800;letter-spacing:-.04em;margin-bottom:1.2rem;text-align:center}
+    .lb-shots{display:flex;gap:1rem;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:.5rem;scrollbar-width:none}
+    .lb-shots::-webkit-scrollbar{display:none}
+    .lb-shot{flex-shrink:0;width:calc(33.33% - .67rem);min-width:200px;border-radius:var(--r);overflow:hidden;scroll-snap-align:start;border:1px solid var(--bd2)}
+    .lb-shot img{width:100%;display:block;max-height:560px;object-fit:cover;object-position:top}
+    .lb-info{margin-top:1.2rem;display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center}
+    @media(max-width:640px){.lb-shot{width:80vw}.lb-inner{padding:0}}
+
+    /* REVEAL */
+    .rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+    .rv.in{opacity:1;transform:none}
+
+    /* FOOTER */
+    footer{background:var(--bg);border-top:1px solid var(--bd);padding:2rem 0}
+    .foot-in{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+    .foot-copy{font-size:.65rem;color:var(--tx4)}
+    .foot-copy span{color:rgba(2,187,229,.5)}
+
+    @media(max-width:640px){
+      .ph-h1{font-size:2.5rem}
+      .filter-bar{position:relative;top:auto}
+      .page-head{padding:2.5rem 0 2rem}
+      .nav-in{gap:.8rem}
+    }
+  </style>
+</head>
+<body>
+
+<div id="cr"></div>
+<div id="cd"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="wrap">
+    <div class="nav-in">
+      <a href="index.html" class="nav-back"><i class="fa-solid fa-arrow-left"></i> Back to Portfolio</a>
+      <div class="nav-logo">Jay<span>.</span>dev</div>
+      <div class="nav-count" id="app-count">15 Apps</div>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-head">
+  <div class="wrap">
+    <span class="ph-tag rv">Full Portfolio</span>
+    <h1 class="ph-h1 rv d1">Apps I've<br>Built &amp; Shipped</h1>
+    <p class="ph-sub rv d2">15+ production apps across ride-hailing, AgriTech, social networking, enterprise tools, lifestyle, and health-tech — built with Flutter and shipped to real users.</p>
+    <div class="ph-stats rv d3">
+      <div class="ph-stat">
+        <div class="ph-stat-num"><span id="c1">0</span>+</div>
+        <div class="ph-stat-label">Apps Shipped</div>
+      </div>
+      <div class="ph-stat">
+        <div class="ph-stat-num"><span id="c2">0</span>K+</div>
+        <div class="ph-stat-label">Total Downloads</div>
+      </div>
+      <div class="ph-stat">
+        <div class="ph-stat-num"><span id="c3">0</span></div>
+        <div class="ph-stat-label">Platforms</div>
+      </div>
+      <div class="ph-stat">
+        <div class="ph-stat-num"><span id="c4">0</span></div>
+        <div class="ph-stat-label">Categories</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <div class="wrap">
+    <div class="filter-scroll">
+      <button class="ftab active" data-cat="all">All (15)</button>
+      <button class="ftab" data-cat="agritech">🌾 AgriTech (3)</button>
+      <button class="ftab" data-cat="ride-hailing">🚕 Ride-hailing (2)</button>
+      <button class="ftab" data-cat="enterprise">💼 Enterprise (5)</button>
+      <button class="ftab" data-cat="social">📱 Social (2)</button>
+      <button class="ftab" data-cat="lifestyle">🏠 Lifestyle (1)</button>
+      <button class="ftab" data-cat="sports">🏃 Sports (1)</button>
+      <button class="ftab" data-cat="healthtech">🏥 Health-tech (1)</button>
+    </div>
+  </div>
+</div>
+
+<!-- GRID -->
+<div class="wrap">
+  <div class="app-grid" id="grid"></div>
+</div>
+
+<!-- LIGHTBOX -->
+<div id="lb">
+  <div class="lb-inner">
+    <button class="lb-close" id="lb-close"><i class="fa-solid fa-xmark"></i></button>
+    <div class="lb-app-name" id="lb-name"></div>
+    <div class="lb-shots" id="lb-shots"></div>
+    <div class="lb-info" id="lb-info"></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-in">
+      <div class="foot-copy">© 2024 Jay Panchal · Senior Flutter &amp; Mobile Developer · Mumbai <span>·</span> All apps built with Flutter</div>
+      <a href="index.html" style="font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--tx3);transition:color .2s" onmouseover="this.style.color='#02BBE5'" onmouseout="this.style.color=''">← Portfolio</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ─── APP DATA ─────────────────────────────────── */
+const APPS = [
+  {
+    title:'AmulAMCS Farmers', sub:'Dairy Farmer Management · Amul India', cat:'agritech', catLabel:'AgriTech 🌾',
+    installs:'100,000+', rating:3.7,
+    desc:'Official Amul AMCS app for dairy farmers across India. Track daily milk collection, view payment history, manage farmer accounts, and monitor dairy operations in real time.',
+    icon:'https://play-lh.googleusercontent.com/ez-87RJxnbZeKafLcn4lJ30Rtw2HS1VjY9RMxlg2zbEnKS89RKMN7r0jh3ENf27IFg',
+    shots:['https://play-lh.googleusercontent.com/w09rvau7W2jyi7TYL7V209oo9fgTOTplPSk5B4C36I3LA0A-qDeKWgR7C8CRbLTUdhjJ=w392','https://play-lh.googleusercontent.com/V5eLIuuzIcbmP1F1nt5Xwemdlfpnpy_ScA_bq5HWi7y84nFXaNrHCl1jEdtu-jteATw=w392','https://play-lh.googleusercontent.com/nsSRUkCbo115Xay4ixWDhyk95mWV-Za0POV8nXXJj3SBKLqPpdFer_XfzDKa1sh5miM=w392'],
+    tech:['Flutter','Firebase','REST API','BLoC','SQLite','FCM'],
+    play:'https://play.google.com/store/apps/details?id=com.mindtech.amul', apple:null,
+    company:'MindTech Solutions', badge:'100K+ Downloads', featured:true,
+  },
+  {
+    title:'Goa Taxi', sub:'Passenger Ride-Hailing Platform', cat:'ride-hailing', catLabel:'Ride-hailing 🚕',
+    installs:'50,000+', rating:3.6,
+    desc:'Safest and easiest way to book a taxi across Goa. Real-time GPS driver tracking, instant booking, in-app payments, driver ratings, and complete trip history.',
+    icon:'https://play-lh.googleusercontent.com/z-fUFXOL11mkh-y4-3HxLRwDemY3AHXR1vF0bqwrnqXS87R6wwq_PBtYBgiRfm4US0o',
+    shots:['https://play-lh.googleusercontent.com/S40HrE-cygDEiah0GvNJeTBpBpAdn78RmNOttlnqQlS4449S1P9kn7OiWuS6-FSvgg=w392','https://play-lh.googleusercontent.com/13eB5aM3HZ04WR-teNQTiD5e5r4UkN3VujA9ICv0xxL55irKFb9p1hmDMBnpZq6Dyg=w392','https://play-lh.googleusercontent.com/WKSzu3EFUojfelbJF8hlPrSOKUpBbP1Ss541efYCZBaMOdipZNzsQhmAQP9t8Gtgjicx=w392'],
+    tech:['Flutter','Firebase','Google Maps','GetX','Razorpay','FCM','REST API'],
+    play:'https://play.google.com/store/apps/details?id=com.gel.goataxi', apple:null,
+    company:'WaytoWeb', badge:'50K+ Downloads', featured:true,
+  },
+  {
+    title:'AmulAMCS Societies', sub:'Dairy Society Supervisor App', cat:'agritech', catLabel:'AgriTech 🌾',
+    installs:'10,000+', rating:4.1,
+    desc:'App for Amul AMCS enabled dairy societies. Manage milk collection from multiple farmers, generate daily reports, track society performance, and sync with the Amul network.',
+    icon:'https://play-lh.googleusercontent.com/OaDzcWU4ZksA-czbBjfON30hGSLVLTCmv2qJWyI5_STZjCN5xtwVDk_KKQ8FZ2jprwnu',
+    shots:['https://play-lh.googleusercontent.com/bVNlncoV6CmxoEfU-c2w0u-HSn1oQUY4ykTcD9b2X1zJliMSFL01hv2rWxALoCtWDISY=w392','https://play-lh.googleusercontent.com/1cCPG4kjR6UplzoHRIDszaBrBJAJ-w-ipZ-x6YXmonpz4cVZ5EF7wE6J3xNFWV1yAQ=w392','https://play-lh.googleusercontent.com/Eo0q4uuqDsbMp06WFi4pqFMzelI-d-vcELzjB1ifGbT-JkDaPDAKldIxlaZtaPYw4nRN=w392'],
+    tech:['Flutter','Firebase','REST API','SQLite','BLoC'],
+    play:'https://play.google.com/store/apps/details?id=com.mindtech.amulamcs.societysupervisor', apple:null,
+    company:'MindTech Solutions', badge:'10K+ Downloads',
+  },
+  {
+    title:'Goa Taxi Driver', sub:'Driver Companion Platform', cat:'ride-hailing', catLabel:'Ride-hailing 🚕',
+    installs:'10,000+', rating:4.2,
+    desc:'Driver-side companion to Goa Taxi. Accept or reject rides, track earnings live, broadcast GPS in the background, and receive instant push notifications for nearby bookings.',
+    icon:'https://play-lh.googleusercontent.com/4v47icUeKwecK_SiIZVzs7Wc3T0W7DsSR4Mw_89EcNSNHx6N9xtNlydmorgW4Ksh7tk',
+    shots:['https://play-lh.googleusercontent.com/qtX5Cvtp1N7zaTnOVWETjGkgsD3nNJiYZJeb7q3WT8wa85xW0uMedoWLpKQSrgs4AjY=w392','https://play-lh.googleusercontent.com/Zz7ggGh1luyfdFI19oVtnRc_bjNmeRh4gTGlMgUTKtZ6L1W_gbcPK6vKVfFU3VyLS1Nb=w392','https://play-lh.googleusercontent.com/PACvdDnzGg0Zg6jPMteT_W2TC46QoRuBAnC370L-eX4f6RV2fD1epI5DOYVIfSCREg=w392'],
+    tech:['Flutter','Firebase','Background GPS','GetX','FCM','REST API'],
+    play:'https://play.google.com/store/apps/details?id=com.gel.goataxidriver', apple:null,
+    company:'WaytoWeb', badge:'4.2★ Rating',
+  },
+  {
+    title:'AKG Setu', sub:'Employee & Inventory Management', cat:'enterprise', catLabel:'Enterprise 💼',
+    installs:'100+', rating:4.9,
+    desc:'Comprehensive B2B platform for effortless employee task management and real-time inventory control. Attendance tracking, leave requests, low-stock alerts, and automated restocking.',
+    icon:'https://play-lh.googleusercontent.com/pIx1mTRR6IlEE367CM1W0g2Go2pWPzCjmzYzFhP3FMSpwA_VS41uJxy7wvMJQ4_9hLvv',
+    shots:['https://play-lh.googleusercontent.com/wy6f4RzGZ8PcM7aAdntH_aHPoVCOxMlFr3azveoW5sUYH-BA9IM75lHBzI4Wo6EX54s=w392','https://play-lh.googleusercontent.com/CGgeL7ttuCp_aWXmpkSDCNIVz6O4S7xLQumZPiE93yU610qh9vZ9jsYX3ptn5iVKKA=w392','https://play-lh.googleusercontent.com/aX-Io8f-raduVrGS1klAv3wP7fI8EF5SAPWJpCGBJDQ42S1lWsgXW5SKGB8aimcpXNfN=w392'],
+    tech:['Flutter','Firebase','SQLite','REST API','GetX','Inventory'],
+    play:'https://play.google.com/store/apps/details?id=com.akgsetu',
+    apple:'https://apps.apple.com/us/app/akg-setu/id6499522847',
+    company:'MindTech Solutions', badge:'4.9★ Rating',
+  },
+  {
+    title:'JainIsta', sub:'Jain Community Social Network', cat:'social', catLabel:'Social 📱',
+    installs:'iOS Only', rating:0,
+    desc:'A dedicated Instagram-like social platform built exclusively for the global Jain community — photo & video sharing, discussion forums, verified member IDs, and event updates.',
+    icon:'https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/58/03/19/580319e7-509c-2d2b-705a-9b216b25a52e/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/100x100bb.jpg',
+    shots:['https://is1-ssl.mzstatic.com/image/thumb/PurpleSource116/v4/59/9e/7f/599e7f0d-6bcd-b4c6-0081-26c0b7698571/aa029fc8-9ec1-456c-9968-2c3441f1c55d_1-1242.jpg/392x696bb.jpg','https://is1-ssl.mzstatic.com/image/thumb/PurpleSource116/v4/6d/68/55/6d6855cf-b02a-ed60-1c43-d78f3cc5f39f/b32da66c-ff38-4b8c-843a-e1b57619a272_2-1242.jpg/392x696bb.jpg','https://is1-ssl.mzstatic.com/image/thumb/PurpleSource116/v4/45/de/75/45de751d-ddfe-2d1a-f7ca-e430969b322c/5b4a328b-c4b1-408e-adc1-0a8754dedd54_3-1242.jpg/392x696bb.jpg'],
+    tech:['Flutter','Firebase','Social Auth','Deep Linking','Push Notifications'],
+    play:null, apple:'https://apps.apple.com/in/app/jainista/id1673735961',
+    company:'WaytoWeb',
+  },
+  {
+    title:'Humad Samaj', sub:'Community Social Platform', cat:'social', catLabel:'Social 📱',
+    installs:'100+', rating:0,
+    desc:'Community-first social app for the Humad Samaj — connecting members, sharing announcements, managing events, and fostering engagement across the community network.',
+    icon:'https://play-lh.googleusercontent.com/aLZV3kiECndv5H3LfEz8TbqTk6X9qgBtcGBoaFWuFujlJqgVKRzo9V8K0TEJJx3kNA',
+    shots:['https://play-lh.googleusercontent.com/nFyNUDKbWlqhs3nbX_dqqWZhL6wPV8Ab-CMMnWkylq3ITKMG64Y5LPcAM8qQAhXGkQ=w392','https://play-lh.googleusercontent.com/tH8o4AGXEqnG7l-z-GcWQPhkGU3Rk2lmf1tlwM_BNebGQSNt88VBtTxSkdCcXScL_lA=w392','https://play-lh.googleusercontent.com/cYEz0XqWHW_6VQw2flm_uEPLc5-CE9D7HhvYKNbzH9Ux7lKxBpnfrym2LSvKUMdIqQ=w392'],
+    tech:['Flutter','Firebase','Community Features','FCM','REST API'],
+    play:'https://play.google.com/store/apps/details?id=com.humadsamaj', apple:null,
+    company:'WaytoWeb',
+  },
+  {
+    title:'AASAN', sub:'BLE Milk Collection & Dairy System', cat:'agritech', catLabel:'AgriTech 🌾',
+    installs:'100+', rating:0,
+    desc:'Offline-first dairy management that integrates via Bluetooth Low Energy with milk fat analyzers. Bluetooth thermal printing, auto PDF/Excel reports, farmer ledger, payment tracking — works without internet.',
+    icon:'https://play-lh.googleusercontent.com/qzmC6LNfe0MQ-YgPvY_UwhLvUnoVLpdE3T2C5s25a_7f-SWwkbX_G5BiF8ywn-9BdGE',
+    shots:['https://play-lh.googleusercontent.com/iZKRBuWrKqzpxsk5K_WgrXphy_AYMrDWCR1COofbznb4LQlsP0_0sMoUh4lAH8Pxtg=w392','https://play-lh.googleusercontent.com/bRCA40enYpkY8VAFMW2CGP7E2w59vouAQRk6FvKjp490yX-Oiux1n1Bj2pnvXPvIFaTO=w392','https://play-lh.googleusercontent.com/xbCzqw_iMQZQnY4dwfWLyyXKNU10PV5WHoI0wbLDdOgrbY5um0gBLLONbwp08hcBWA=w392'],
+    tech:['Flutter','SQLite','BLE','BT Thermal Print','PDF Export','Excel Export'],
+    play:'https://play.google.com/store/apps/details?id=com.mindtech.aasaan', apple:null,
+    company:'MindTech Solutions', badge:'Offline-First',
+  },
+  {
+    title:'JewelQA', sub:'Jewelry Quality Assurance', cat:'enterprise', catLabel:'Enterprise 💼',
+    installs:'10+', rating:0,
+    desc:'A gem of an app for efficient QA testing in the jewelry industry. Real-time quality monitoring, defect tracking, production analytics, and report generation for QA teams.',
+    icon:'https://play-lh.googleusercontent.com/pJcSn-K5brW9MbAyjKmX1GIf0jTupu2edLqVuZVJumhbu5SSqtq_4mSnGa9mNT9i-3E',
+    shots:['https://play-lh.googleusercontent.com/Q3x8UcowRBqbWVbc6v2IQx8x6dB2txbB3isbrL5vsHGfui0PUGfppAzwiPrcTFJCr1o=w392','https://play-lh.googleusercontent.com/ImAqhZHYdP6mCMzM1fhwZ7IRo8AjVr1k2P52V7O3OV0EviwT4QIDaJP8neYLYDN1yLzL=w392','https://play-lh.googleusercontent.com/YIfuWBVeAXsAErQ7tfeFi6jfQyYSbBjSCSAe_5VMUOSfcDHEOaphjdb7Z-6fRImnB9ZR=w392'],
+    tech:['Flutter','REST API','QA Analytics','GetX','MindTech'],
+    play:'https://play.google.com/store/apps/details?id=com.tereotech.jewelQA.jewelqa', apple:null,
+    company:'MindTech Solutions',
+  },
+  {
+    title:'JewelQA HOD', sub:'QA Head of Department Dashboard', cat:'enterprise', catLabel:'Enterprise 💼',
+    installs:'5+', rating:0,
+    desc:'Advanced QA oversight dashboard for jewelry industry Heads of Department. Real-time alerts, team performance metrics, cross-floor monitoring, and process compliance reporting.',
+    icon:'https://play-lh.googleusercontent.com/PIYthBVv7Px_S8wRMHnA0JKSnoOeOMVIwmD6e3FAY5g0zbvl_xiVNmumWdbAGgflKA',
+    shots:['https://play-lh.googleusercontent.com/_u-Jl6Q9LuGD5w1LS7gQryJYRcRmTUNmOsR0FbaM46eWwMT5P_JU1R9tWbub4Ji8FCJj=w392','https://play-lh.googleusercontent.com/JQ0K9J1a8ED2ADLzBtQuToQjOmL4uHK5ENlL7R9dARHoHzQWGq7a_RhSWeR9KXbfuec=w392','https://play-lh.googleusercontent.com/EbZBT9nPvQLpXe9UAsNfI-GCaHjyUHnZ-9qjQUPfYRcOwF4ZjooB5l2xBS63yVwQqA=w392'],
+    tech:['Flutter','REST API','Real-time Analytics','GetX','MindTech'],
+    play:'https://play.google.com/store/apps/details?id=com.tereotech.qa_hod', apple:null,
+    company:'MindTech Solutions',
+  },
+  {
+    title:'Jewel Query', sub:'Jewelry Specifications Catalog', cat:'enterprise', catLabel:'Enterprise 💼',
+    installs:'5+', rating:0,
+    desc:'Empowering jewelry professionals with detailed product specifications at their fingertips. Browse, filter, and manage the full jewelry product catalog with precision.',
+    icon:'https://play-lh.googleusercontent.com/Z4RaHUg4EYZk1MSqdJZ0Jt3Ku8L1m3gLTSIDJSuhdGbknmmV4x591W_Cq4FW58Rd4t0',
+    shots:['https://play-lh.googleusercontent.com/7dk-Yfiiz4K_rQktzCloHaaMeeib-6exrBEGp4jn3fNjTeLzc0qnHUlwLh_1X9x4sS0=w392','https://play-lh.googleusercontent.com/MRYp5v0ZzCRXmeXc7JRBgbzyezd2RFd5GvSnt1AeIMsZN7gx4Bn5_xDTTv1-Cta_tA=w392','https://play-lh.googleusercontent.com/YaJYd2hpFypxNrm7BehA3B1VL4Io0p7ezMw_pxxwmY_xOFMrhMQIcooKdTl0OZkK42E=w392'],
+    tech:['Flutter','REST API','Catalog Search','GetX','Android + iOS'],
+    play:'https://play.google.com/store/apps/details?id=com.mindtech.goldstarllc.goldstarllc',
+    apple:'https://apps.apple.com/in/app/jewel-query/id6479253753',
+    company:'MindTech Solutions',
+  },
+  {
+    title:'Smart Track', sub:'Bag & Inventory Tracking System', cat:'enterprise', catLabel:'Enterprise 💼',
+    installs:'10+', rating:0,
+    desc:'Smart Track streamlines bag management and inventory processes for peak efficiency — QR/barcode scanning, real-time stock movement tracking, and asset management.',
+    icon:'https://play-lh.googleusercontent.com/-zqGRbORLMuUX6Hqew2x2D6Pnwt8UwQ6cbam6t7ZR1SL4ckiPns_npjcOqpYp93oAQ',
+    shots:['https://play-lh.googleusercontent.com/8V80Ml5NLPWZUFNAdxA-mdEgsc3NmKAXM3FLcIzMScMlkExvIWmAgRVvVUkGhGAp3EEH=w392','https://play-lh.googleusercontent.com/afTTynhJxDcl7IRjR5SK7dvhwHpGu1SP8NIHEVeq8-MCMegR3S-tOiulw5Dcq1qUJw=w392','https://play-lh.googleusercontent.com/a7i4tRCxUDH3nLRin6zt2v4TpFqEovKoNSgutXOxc-RsWTxzYJZlm4CeLw6m9iihMQ_Y=w392'],
+    tech:['Flutter','QR/Barcode','REST API','GetX','SQLite','Tracking'],
+    play:'https://play.google.com/store/apps/details?id=com.mindtech.smarttrack', apple:null,
+    company:'MindTech Solutions',
+  },
+  {
+    title:'Holiday Homes Service', sub:'On-demand Home Services App', cat:'lifestyle', catLabel:'Lifestyle 🏠',
+    installs:'1,000+', rating:0,
+    desc:'UrbanClap-style on-demand service marketplace for holiday villa owners — deep cleaning, spa, baby care, AC servicing, and more. Full 3-app ecosystem: customer, service provider & admin.',
+    icon:'https://play-lh.googleusercontent.com/Q7dPIAQoXiZnnPFnptVRolYYCu0IgQ637zdcpK6rNvgH331oWifmJMbNyY0SEkhqrBs',
+    shots:['https://play-lh.googleusercontent.com/z6eWcv_rt_vfN1NfdlcT1roIJ9hqFbHKjrTd-hwx4FR2TE2CJQve5Mnbu_bv_x-JuBI=w392','https://play-lh.googleusercontent.com/xLUXhBRbrcU6lbyrMMQNDtTKvwFx33ZqBzKkbcTJkzdyiGvXGaoI6dmC27froJkPaFI=w392','https://play-lh.googleusercontent.com/uI-Eb3zBpefr5lwVc3HrR_HlnkjorqmXQ7fAUh-CYjVOta4aTwQJuJa8MWcaIrcd5_I=w392'],
+    tech:['Flutter','Firebase','FCM','REST API','GetX','Service Timer'],
+    play:'https://play.google.com/store/apps/details?id=com.busybee.customer', apple:null,
+    company:'WaytoWeb',
+  },
+  {
+    title:'SportMind Health', sub:'Mental Training for Athletes', cat:'sports', catLabel:'Sports 🏃',
+    installs:'5,000+', rating:0,
+    desc:'The gym of the mind — unlock peak mental performance for squash players. Guided visualization, focus drills, Firebase-backed progress tracking, and Play Store premium subscriptions.',
+    icon:'https://play-lh.googleusercontent.com/bEokyvIGW8R1Ur06xuFdo-PMkV3xxbwtdkpk0jHLFIxYHcVevkw5aqo_SxSBovfPEh_S',
+    shots:['https://play-lh.googleusercontent.com/WrSPbx3b_pz_ilnSmH4th2IAOb7pVdMBWpZjFZ-Ufz9K1rBSuD_R8FqcBh0FLLP3EQ=w392','https://play-lh.googleusercontent.com/YnGDwUo_amsIpp149hMkjodYQtTXodlB0mAE3x5RvMj7LyXxoNCG_15RN_bNN07vPlMH=w392','https://play-lh.googleusercontent.com/Ku2_sdd17ve8gJNcb-kF41s5VVY4cYh62POx3aVs01dmy9RA47d6Wbs9EfJfUsbBB-hD=w392'],
+    tech:['Flutter','Firebase','Play Subscriptions','Deep Linking','Push Notifications'],
+    play:'https://play.google.com/store/apps/details?id=com.carusoft.squashmind', apple:null,
+    company:'WaytoWeb', badge:'5K+ Downloads',
+  },
+  {
+    title:'Felicidade', sub:'Mental Health Teleconsultation', cat:'healthtech', catLabel:'Health-tech 🏥',
+    installs:'Private', rating:0,
+    desc:'Secure mental health platform connecting patients (anxiety & depression) with certified doctors via HD video and audio calls powered by Zego Cloud SDK — private, real-time consultations.',
+    icon:null,
+    shots:[],
+    tech:['Flutter','Zego Cloud SDK','Firebase','Video Calling','WebRTC','FCM'],
+    play:null, apple:null,
+    company:'Client Project', badge:'Private App', special:true,
+    emoji:'🧠', bg:'linear-gradient(135deg,#1a0a2e 0%,#3d1069 50%,#6b2fb8 100%)',
+  },
+];
+
+/* ─── RENDER CARDS ──────────────────────────────── */
+function stars(n){
+  if(!n) return '';
+  let s='';
+  for(let i=1;i<=5;i++) s+=`<i class="fa-${i<=Math.round(n)?'solid':'regular'} fa-star"></i>`;
+  return s;
+}
+
+function renderCard(a, idx){
+  const hasShot = a.shots && a.shots.length>0;
+  const delay = (idx%3)*0.08;
+
+  let imgHtml = '';
+  if(a.special){
+    imgHtml = `<div class="special-banner" style="background:${a.bg}">
+      <span style="font-size:3.5rem">${a.emoji||'📱'}</span>
+      <span style="font-family:var(--ff);font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.15em;color:rgba(255,255,255,.45)">Private / NDA App</span>
+    </div>`;
+  } else if(hasShot){
+    imgHtml = `<div class="card-img">
+      <img class="card-shot" src="${a.shots[0]}" alt="${a.title} screenshot" loading="lazy" onerror="this.parentElement.innerHTML='<div class=card-img-fallback>📱</div>'">
+      <div class="card-grad"></div>
+      ${a.icon?`<div class="card-icon"><img src="${a.icon}=w88-h88-rw" alt="${a.title} icon" loading="lazy" onerror="this.style.display='none'"></div>`:''}
+      <div class="card-cat">${a.catLabel}</div>
+      ${a.badge?`<div class="card-badge">${a.badge}</div>`:''}
+    </div>`;
+  } else {
+    imgHtml = `<div class="card-img">
+      <div class="card-img-fallback">📱</div>
+      <div class="card-cat">${a.catLabel}</div>
+      ${a.badge?`<div class="card-badge">${a.badge}</div>`:''}
+    </div>`;
+  }
+
+  const ratingHtml = a.rating>0 ? `<div class="card-rating">${stars(a.rating)} <span>${a.rating.toFixed(1)}</span></div>` : '';
+
+  let linksHtml = '';
+  if(a.play) linksHtml += `<a href="${a.play}" target="_blank" rel="noopener" class="store-btn play" onclick="event.stopPropagation()"><i class="fa-brands fa-google-play"></i> Play Store</a>`;
+  if(a.apple) linksHtml += `<a href="${a.apple}" target="_blank" rel="noopener" class="store-btn" onclick="event.stopPropagation()"><i class="fa-brands fa-apple"></i> App Store</a>`;
+  if(!a.play && !a.apple) linksHtml += `<span class="store-btn disabled"><i class="fa-solid fa-lock"></i> Private</span>`;
+
+  return `<div class="app-card rv" data-cat="${a.cat}" data-idx="${idx}" style="transition-delay:${delay}s">
+    ${imgHtml}
+    <div class="card-body">
+      <div class="card-title">${a.title}</div>
+      <div class="card-sub">${a.sub}</div>
+      <div class="card-meta">
+        <div class="card-installs"><i class="fa-solid fa-download"></i>${a.installs}</div>
+        ${ratingHtml}
+      </div>
+      <p class="card-desc">${a.desc}</p>
+      <div class="card-tech">${a.tech.map(t=>`<span class="tech-c">${t}</span>`).join('')}</div>
+      <div class="card-links">${linksHtml}</div>
+      <div class="card-company">${a.company}</div>
+    </div>
+  </div>`;
+}
+
+const grid = document.getElementById('grid');
+grid.innerHTML = APPS.map((a,i)=>renderCard(a,i)).join('');
+
+/* ─── FILTER ─────────────────────────────────────── */
+document.querySelectorAll('.ftab').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.ftab').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const cat = btn.dataset.cat;
+    document.querySelectorAll('.app-card').forEach(card=>{
+      const show = cat==='all' || card.dataset.cat===cat;
+      card.classList.toggle('hidden', !show);
+    });
+  });
+});
+
+/* ─── LIGHTBOX ───────────────────────────────────── */
+document.querySelectorAll('.app-card').forEach((card, i)=>{
+  card.addEventListener('click', ()=>{
+    const a = APPS[parseInt(card.dataset.idx)];
+    if(!a.shots || a.shots.length===0) return;
+    document.getElementById('lb-name').textContent = a.title;
+    document.getElementById('lb-shots').innerHTML = a.shots.map(s=>
+      `<div class="lb-shot"><img src="${s}" alt="${a.title}" loading="lazy"></div>`
+    ).join('');
+    document.getElementById('lb-info').innerHTML = a.tech.map(t=>`<span class="tech-c">${t}</span>`).join('');
+    document.getElementById('lb').classList.add('open');
+    document.body.style.overflow='hidden';
+  });
+});
+document.getElementById('lb-close').addEventListener('click',()=>{
+  document.getElementById('lb').classList.remove('open');
+  document.body.style.overflow='';
+});
+document.getElementById('lb').addEventListener('click', e=>{
+  if(e.target===document.getElementById('lb')){
+    document.getElementById('lb').classList.remove('open');
+    document.body.style.overflow='';
+  }
+});
+document.addEventListener('keydown', e=>{ if(e.key==='Escape'){ document.getElementById('lb').classList.remove('open'); document.body.style.overflow=''; }});
+
+/* ─── COUNTERS ───────────────────────────────────── */
+function countTo(el,to,dur=1400){
+  let s=0; const r=t=>{if(!s)s=t; const p=Math.min((t-s)/dur,1); el.textContent=Math.floor((1-Math.pow(1-p,3))*to); if(p<1)requestAnimationFrame(r); else el.textContent=to;};
+  requestAnimationFrame(r);
+}
+const cio = new IntersectionObserver(e=>{
+  if(e[0].isIntersecting){
+    countTo(document.getElementById('c1'),15);
+    countTo(document.getElementById('c2'),170);
+    countTo(document.getElementById('c3'),2);
+    countTo(document.getElementById('c4'),7);
+    cio.disconnect();
+  }
+},{threshold:.5});
+cio.observe(document.querySelector('.ph-stats'));
+
+/* ─── SCROLL REVEAL ──────────────────────────────── */
+const rio = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){e.target.classList.add('in');rio.unobserve(e.target);}});
+},{threshold:0.06});
+document.querySelectorAll('.rv').forEach(el=>rio.observe(el));
+
+/* ─── CURSOR ─────────────────────────────────────── */
+const cr=document.getElementById('cr'), cd=document.getElementById('cd');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cd.style.left=mx+'px';cd.style.top=my+'px';});
+(function lc(){rx+=(mx-rx)*.13;ry+=(my-ry)*.13;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(lc);})();
+document.querySelectorAll('a,button,.app-card,.ftab').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('ch'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('ch'));
+});
+</script>
+</body>
+</html>
