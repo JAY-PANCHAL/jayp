@@ -578,6 +578,40 @@ document.querySelectorAll('a,button,.app-card,.ftab').forEach(el=>{
   el.addEventListener('mouseenter',()=>document.body.classList.add('ch'));
   el.addEventListener('mouseleave',()=>document.body.classList.remove('ch'));
 });
+
+/* ─── 3D TILT ENGINE ──────────────────────────────── */
+function tilt3D(selector,{maxT=14,scale=1.04,persp=750,glareOp=0.10}={}){
+  document.querySelectorAll(selector).forEach(el=>{
+    el.style.transformStyle='preserve-3d';
+    el.style.willChange='transform';
+    const gl=document.createElement('div');
+    gl.style.cssText=`position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:99;opacity:0;transition:opacity .3s;background:radial-gradient(circle at 50% 50%,rgba(255,255,255,${glareOp}),transparent 65%)`;
+    if(getComputedStyle(el).position==='static')el.style.position='relative';
+    el.appendChild(gl);
+    el.addEventListener('mousemove',e=>{
+      const r=el.getBoundingClientRect();
+      const x=(e.clientX-r.left)/r.width;
+      const y=(e.clientY-r.top)/r.height;
+      const rx=(y-.5)*-maxT*2, ry=(x-.5)*maxT*2;
+      el.style.transition='transform .08s ease';
+      el.style.transform=`perspective(${persp}px) rotateX(${rx}deg) rotateY(${ry}deg) scale3d(${scale},${scale},${scale})`;
+      gl.style.opacity='1';
+      gl.style.background=`radial-gradient(circle at ${x*100}% ${y*100}%,rgba(255,255,255,${glareOp}),transparent 65%)`;
+    });
+    el.addEventListener('mouseleave',()=>{
+      el.style.transition='transform .55s cubic-bezier(.22,1,.36,1)';
+      el.style.transform=`perspective(${persp}px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)`;
+      gl.style.opacity='0';
+    });
+  });
+}
+tilt3D('.app-card',{maxT:10,scale:1.02,persp:850,glareOp:.07});
+tilt3D('.ftab',    {maxT:14,scale:1.05,persp:400,glareOp:.12});
+tilt3D('.store-btn',{maxT:12,scale:1.04,persp:350,glareOp:.10});
+
+/* ─── PAGE HEADER 3D DEPTH TEXT ─────────────────── */
+const ph1=document.querySelector('.ph-h1');
+if(ph1) ph1.style.filter='drop-shadow(2px 3px 0px rgba(2,187,229,.22)) drop-shadow(4px 6px 0px rgba(2,187,229,.10))';
 </script>
 </body>
 </html>
