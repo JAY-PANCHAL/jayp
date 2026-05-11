@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>All Projects — Jay Panchal · Flutter & Mobile App Developer</title>
-  <meta name="description" content="15+ production apps built by Jay Panchal — Flutter developer from Mumbai. 170K+ total downloads across ride-hailing, AgriTech, social, enterprise and lifestyle apps.">
+  <meta name="description" content="18+ production apps built by Jay Panchal — Flutter developer from Mumbai. 170K+ total downloads across ride-hailing, AgriTech, social, enterprise and lifestyle apps.">
   <meta name="keywords" content="Jay Panchal projects, Flutter apps portfolio, Goa Taxi app, AmulAMCS app, AASAN dairy app, Flutter developer Mumbai apps">
   <link rel="canonical" href="https://jay-panchal.dev/projects.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -73,7 +73,7 @@
     @media(max-width:580px){.app-grid{grid-template-columns:1fr}}
 
     /* APP CARD */
-    .app-card{background:var(--sur);border:1px solid var(--bd);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;transition:transform .28s var(--ease),border-color .28s,box-shadow .28s;cursor:pointer}
+    .app-card{background:var(--sur);border:1px solid var(--bd);border-radius:var(--r);display:flex;flex-direction:column;transition:transform .4s cubic-bezier(.34,1.2,.64,1),border-color .28s,box-shadow .28s;cursor:pointer}
     .app-card:hover{transform:translateY(-5px);border-color:rgba(2,187,229,.28);box-shadow:0 18px 55px rgba(0,0,0,.4),0 0 35px rgba(2,187,229,.07)}
     .app-card.hidden{display:none}
 
@@ -111,9 +111,28 @@
     .card-company{font-size:.6rem;color:var(--tx4);text-transform:uppercase;letter-spacing:.1em;margin-top:.8rem;display:flex;align-items:center;gap:.4rem}
     .card-company::before{content:'';display:block;width:4px;height:4px;border-radius:50%;background:var(--tx4);flex-shrink:0}
 
+    /* COMPANY PROJECT BADGE */
+    .company-badge{display:inline-flex;align-items:center;gap:.4rem;font-size:.56rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,196,40,.85);background:rgba(255,196,40,.08);border:1px solid rgba(255,196,40,.22);border-radius:99px;padding:.2rem .65rem;margin-bottom:.7rem}
+    .company-badge i{font-size:.58rem}
+
+    /* CARD SHIMMER HOVER */
+    .app-card{position:relative;overflow:hidden;transition:transform .45s cubic-bezier(.22,1,.36,1),border-color .3s,box-shadow .45s}
+    .app-card::before{content:'';position:absolute;top:0;left:-120%;width:60%;height:100%;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.04) 50%,transparent 60%);transform:skewX(-18deg);transition:left .65s ease;z-index:10;pointer-events:none}
+    .app-card::after{content:'';position:absolute;inset:0;border-radius:var(--r);background:linear-gradient(135deg,rgba(2,187,229,.05) 0%,transparent 55%);opacity:0;transition:opacity .35s ease;pointer-events:none}
+    .app-card:hover{transform:translateY(-8px) scale(1.015);border-color:rgba(2,187,229,.38);box-shadow:0 26px 65px rgba(0,0,0,.5),0 0 0 1px rgba(2,187,229,.12),0 0 50px rgba(2,187,229,.08)}
+    .app-card:hover::before{left:160%}
+    .app-card:hover::after{opacity:1}
+
+    /* FEATURES LIST on private cards */
+    .card-features{list-style:none;display:flex;flex-direction:column;gap:.3rem;margin-bottom:.9rem;padding:0}
+    .card-features li{font-size:.72rem;color:var(--tx2);line-height:1.5;display:flex;align-items:flex-start;gap:.45rem}
+    .card-features li::before{content:'→';color:var(--cyan);font-size:.65rem;flex-shrink:0;margin-top:.1rem}
+
     /* SPECIAL CARD (no screenshots) */
     .special-banner{height:200px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.8rem;position:relative;overflow:hidden}
     .special-banner::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(2,187,229,.15) 0%,transparent 70%)}
+    .special-banner::after{content:'';position:absolute;inset:-100% 0;width:50%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.05),transparent);animation:shimmer 3.5s ease-in-out infinite;transform:skewX(-20deg)}
+    @keyframes shimmer{0%{left:-100%}100%{left:200%}}
 
     /* LIGHTBOX */
     #lb{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.92);backdrop-filter:blur(20px);display:none;align-items:center;justify-content:center;padding:2rem}
@@ -158,7 +177,7 @@
     <div class="nav-in">
       <a href="index.html" class="nav-back"><i class="fa-solid fa-arrow-left"></i> Back to Portfolio</a>
       <div class="nav-logo">Jay<span>.</span>dev</div>
-      <div class="nav-count" id="app-count">15 Apps</div>
+      <div class="nav-count" id="app-count">18 Apps</div>
     </div>
   </div>
 </nav>
@@ -168,7 +187,7 @@
   <div class="wrap">
     <span class="ph-tag rv">Full Portfolio</span>
     <h1 class="ph-h1 rv d1">Apps I've<br>Built &amp; Shipped</h1>
-    <p class="ph-sub rv d2">15+ production apps across ride-hailing, AgriTech, social networking, enterprise tools, lifestyle, and health-tech — built with Flutter and shipped to real users.</p>
+    <p class="ph-sub rv d2">18+ production apps across ride-hailing, AgriTech, social networking, enterprise tools, lifestyle, and health-tech — built with Flutter and shipped to real users.</p>
     <div class="ph-stats rv d3">
       <div class="ph-stat">
         <div class="ph-stat-num"><span id="c1">0</span>+</div>
@@ -194,12 +213,12 @@
 <div class="filter-bar">
   <div class="wrap">
     <div class="filter-scroll">
-      <button class="ftab active" data-cat="all">All (15)</button>
-      <button class="ftab" data-cat="agritech">🌾 AgriTech (3)</button>
+      <button class="ftab active" data-cat="all">All (18)</button>
+      <button class="ftab" data-cat="agritech">🌾 AgriTech (4)</button>
       <button class="ftab" data-cat="ride-hailing">🚕 Ride-hailing (2)</button>
-      <button class="ftab" data-cat="enterprise">💼 Enterprise (5)</button>
+      <button class="ftab" data-cat="enterprise">💼 Enterprise (6)</button>
       <button class="ftab" data-cat="social">📱 Social (2)</button>
-      <button class="ftab" data-cat="lifestyle">🏠 Lifestyle (1)</button>
+      <button class="ftab" data-cat="lifestyle">🏠 Lifestyle (2)</button>
       <button class="ftab" data-cat="sports">🏃 Sports (1)</button>
       <button class="ftab" data-cat="healthtech">🏥 Health-tech (1)</button>
     </div>
@@ -242,7 +261,7 @@ const APPS = [
     shots:['https://play-lh.googleusercontent.com/w09rvau7W2jyi7TYL7V209oo9fgTOTplPSk5B4C36I3LA0A-qDeKWgR7C8CRbLTUdhjJ=w392','https://play-lh.googleusercontent.com/V5eLIuuzIcbmP1F1nt5Xwemdlfpnpy_ScA_bq5HWi7y84nFXaNrHCl1jEdtu-jteATw=w392','https://play-lh.googleusercontent.com/nsSRUkCbo115Xay4ixWDhyk95mWV-Za0POV8nXXJj3SBKLqPpdFer_XfzDKa1sh5miM=w392'],
     tech:['Flutter','Firebase','REST API','BLoC','SQLite','FCM'],
     play:'https://play.google.com/store/apps/details?id=com.mindtech.amul', apple:null,
-    company:'MindTech Solutions', badge:'100K+ Downloads', featured:true,
+    company:'MindTech Solutions', badge:'100K+ Downloads', featured:true, companyProject:true,
   },
   {
     title:'Goa Taxi', sub:'Passenger Ride-Hailing Platform', cat:'ride-hailing', catLabel:'Ride-hailing 🚕',
@@ -252,7 +271,7 @@ const APPS = [
     shots:['https://play-lh.googleusercontent.com/S40HrE-cygDEiah0GvNJeTBpBpAdn78RmNOttlnqQlS4449S1P9kn7OiWuS6-FSvgg=w392','https://play-lh.googleusercontent.com/13eB5aM3HZ04WR-teNQTiD5e5r4UkN3VujA9ICv0xxL55irKFb9p1hmDMBnpZq6Dyg=w392','https://play-lh.googleusercontent.com/WKSzu3EFUojfelbJF8hlPrSOKUpBbP1Ss541efYCZBaMOdipZNzsQhmAQP9t8Gtgjicx=w392'],
     tech:['Flutter','Firebase','Google Maps','GetX','Razorpay','FCM','REST API'],
     play:'https://play.google.com/store/apps/details?id=com.gel.goataxi', apple:null,
-    company:'WaytoWeb', badge:'50K+ Downloads', featured:true,
+    company:'WaytoWeb', badge:'50K+ Downloads', featured:true, companyProject:true,
   },
   {
     title:'AmulAMCS Societies', sub:'Dairy Society Supervisor App', cat:'agritech', catLabel:'AgriTech 🌾',
@@ -262,7 +281,7 @@ const APPS = [
     shots:['https://play-lh.googleusercontent.com/bVNlncoV6CmxoEfU-c2w0u-HSn1oQUY4ykTcD9b2X1zJliMSFL01hv2rWxALoCtWDISY=w392','https://play-lh.googleusercontent.com/1cCPG4kjR6UplzoHRIDszaBrBJAJ-w-ipZ-x6YXmonpz4cVZ5EF7wE6J3xNFWV1yAQ=w392','https://play-lh.googleusercontent.com/Eo0q4uuqDsbMp06WFi4pqFMzelI-d-vcELzjB1ifGbT-JkDaPDAKldIxlaZtaPYw4nRN=w392'],
     tech:['Flutter','Firebase','REST API','SQLite','BLoC'],
     play:'https://play.google.com/store/apps/details?id=com.mindtech.amulamcs.societysupervisor', apple:null,
-    company:'MindTech Solutions', badge:'10K+ Downloads',
+    company:'MindTech Solutions', badge:'10K+ Downloads', companyProject:true,
   },
   {
     title:'Goa Taxi Driver', sub:'Driver Companion Platform', cat:'ride-hailing', catLabel:'Ride-hailing 🚕',
@@ -272,7 +291,7 @@ const APPS = [
     shots:['https://play-lh.googleusercontent.com/qtX5Cvtp1N7zaTnOVWETjGkgsD3nNJiYZJeb7q3WT8wa85xW0uMedoWLpKQSrgs4AjY=w392','https://play-lh.googleusercontent.com/Zz7ggGh1luyfdFI19oVtnRc_bjNmeRh4gTGlMgUTKtZ6L1W_gbcPK6vKVfFU3VyLS1Nb=w392','https://play-lh.googleusercontent.com/PACvdDnzGg0Zg6jPMteT_W2TC46QoRuBAnC370L-eX4f6RV2fD1epI5DOYVIfSCREg=w392'],
     tech:['Flutter','Firebase','Background GPS','GetX','FCM','REST API'],
     play:'https://play.google.com/store/apps/details?id=com.gel.goataxidriver', apple:null,
-    company:'WaytoWeb', badge:'4.2★ Rating',
+    company:'WaytoWeb', badge:'4.2★ Rating', companyProject:true,
   },
   {
     title:'AKG Setu', sub:'Employee & Inventory Management', cat:'enterprise', catLabel:'Enterprise 💼',
@@ -313,7 +332,7 @@ const APPS = [
     shots:['https://play-lh.googleusercontent.com/iZKRBuWrKqzpxsk5K_WgrXphy_AYMrDWCR1COofbznb4LQlsP0_0sMoUh4lAH8Pxtg=w392','https://play-lh.googleusercontent.com/bRCA40enYpkY8VAFMW2CGP7E2w59vouAQRk6FvKjp490yX-Oiux1n1Bj2pnvXPvIFaTO=w392','https://play-lh.googleusercontent.com/xbCzqw_iMQZQnY4dwfWLyyXKNU10PV5WHoI0wbLDdOgrbY5um0gBLLONbwp08hcBWA=w392'],
     tech:['Flutter','SQLite','BLE','BT Thermal Print','PDF Export','Excel Export'],
     play:'https://play.google.com/store/apps/details?id=com.mindtech.aasaan', apple:null,
-    company:'MindTech Solutions', badge:'Offline-First',
+    company:'MindTech Solutions', badge:'Offline-First', companyProject:true,
   },
   {
     title:'JewelQA', sub:'Jewelry Quality Assurance', cat:'enterprise', catLabel:'Enterprise 💼',
@@ -377,15 +396,52 @@ const APPS = [
     company:'WaytoWeb', badge:'5K+ Downloads',
   },
   {
-    title:'Felicidade', sub:'Mental Health Teleconsultation', cat:'healthtech', catLabel:'Health-tech 🏥',
+    title:'Felicidade', sub:'Mental Health Teleconsultation Platform', cat:'healthtech', catLabel:'Health-tech 🏥',
     installs:'Private', rating:0,
-    desc:'Secure mental health platform connecting patients (anxiety & depression) with certified doctors via HD video and audio calls powered by Zego Cloud SDK — private, real-time consultations.',
+    desc:'Secure mental health platform connecting patients (anxiety & depression) with certified doctors via HD video & audio calls powered by Zego Cloud SDK. Features: real-time video/audio consultations, in-app appointment booking, encrypted chat, doctor profile discovery, session history, Firebase Auth, and FCM push reminders — built to HIPAA-aligned privacy standards.',
     icon:null,
     shots:[],
-    tech:['Flutter','Zego Cloud SDK','Firebase','Video Calling','WebRTC','FCM'],
+    tech:['Flutter','Zego Cloud SDK','Firebase','Video Calling','WebRTC','Encrypted Chat','FCM','Appointment Booking'],
     play:null, apple:null,
     company:'Client Project', badge:'Private App', special:true,
     emoji:'🧠', bg:'linear-gradient(135deg,#1a0a2e 0%,#3d1069 50%,#6b2fb8 100%)',
+    features:['HD video & audio consultations (Zego Cloud)','Patient–doctor real-time encrypted chat','Appointment booking & session scheduling','Doctor discovery with specialisation filters','Firebase Auth · FCM push reminders','Session history & prescription notes'],
+  },
+  {
+    title:'BusyBee Service Provider', sub:'On-demand Service Worker App', cat:'lifestyle', catLabel:'Lifestyle 🏠',
+    installs:'Private', rating:0,
+    desc:'Service-provider side of the BusyBee 3-app ecosystem. Cleaners, spa therapists, and handymen accept/reject bookings, navigate to holiday villas, log service start/end times with live GPS tracking, and manage their daily earnings dashboard.',
+    icon:null,
+    shots:[],
+    tech:['Flutter','Firebase','Google Maps','FCM','GetX','Live GPS','Service Timer'],
+    play:null, apple:null,
+    company:'WaytoWeb', badge:'Private App', special:true,
+    emoji:'🧹', bg:'linear-gradient(135deg,#0a1a10 0%,#1a5c35 50%,#2ea05a 100%)',
+    features:['Real-time booking accept/reject flow','Live GPS navigation to service location','Service timer with photo check-in/out','Earnings dashboard & weekly payouts','Push alerts for new nearby bookings','Works offline with local sync'],
+  },
+  {
+    title:'BusyBee Admin', sub:'Service Marketplace Operations Dashboard', cat:'enterprise', catLabel:'Enterprise 💼',
+    installs:'Private', rating:0,
+    desc:'Admin control panel for the BusyBee on-demand home-services platform. Full oversight of the customer → service provider pipeline: manage bookings, assign workers, handle disputes, monitor real-time maps, and generate service performance reports.',
+    icon:null,
+    shots:[],
+    tech:['Flutter','Firebase','Admin SDK','Analytics','REST API','GetX','Real-time Map'],
+    play:null, apple:null,
+    company:'WaytoWeb', badge:'Private App', special:true,
+    emoji:'⚙️', bg:'linear-gradient(135deg,#0a0e1a 0%,#1a2e5c 50%,#2f50a0 100%)',
+    features:['Full booking lifecycle management','Worker assignment & schedule optimisation','Real-time service-tracking map','Revenue & performance analytics dashboard','Customer dispute resolution panel','Push broadcast notifications to all users'],
+  },
+  {
+    title:'Summit Tractors', sub:'Agricultural Tractor Sales & Service', cat:'agritech', catLabel:'AgriTech 🌾',
+    installs:'Unlisted', rating:0,
+    desc:'Tractor dealership management app for Summit Tractors — product catalogue with detailed spec sheets, service booking for farm machinery, spare-parts inventory, dealer locator with maps, and lead management for the sales team.',
+    icon:null,
+    shots:[],
+    tech:['Flutter','Firebase','Google Maps','REST API','GetX','PDF Catalog'],
+    play:null, apple:null,
+    company:'Client Project', badge:'Unlisted', special:true,
+    emoji:'🚜', bg:'linear-gradient(135deg,#1a1000 0%,#5c3800 50%,#a06020 100%)',
+    features:['Tractor catalogue with full spec PDFs','Service & maintenance booking flow','Spare-parts inventory & availability','Dealer locator with Google Maps','Sales lead tracking & follow-up CRM','Enquiry-to-order pipeline management'],
   },
 ];
 
@@ -405,7 +461,7 @@ function renderCard(a, idx){
   if(a.special){
     imgHtml = `<div class="special-banner" style="background:${a.bg}">
       <span style="font-size:3.5rem">${a.emoji||'📱'}</span>
-      <span style="font-family:var(--ff);font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.15em;color:rgba(255,255,255,.45)">Private / NDA App</span>
+      <span style="font-family:var(--ff);font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.15em;color:rgba(255,255,255,.45)">${a.badge||'Private / NDA App'}</span>
     </div>`;
   } else if(hasShot){
     imgHtml = `<div class="card-img">
@@ -435,11 +491,13 @@ function renderCard(a, idx){
     <div class="card-body">
       <div class="card-title">${a.title}</div>
       <div class="card-sub">${a.sub}</div>
+      ${a.companyProject ? `<div class="company-badge"><i class="fa-solid fa-building"></i> ${a.company} · Built during employment</div>` : ''}
       <div class="card-meta">
         <div class="card-installs"><i class="fa-solid fa-download"></i>${a.installs}</div>
         ${ratingHtml}
       </div>
       <p class="card-desc">${a.desc}</p>
+      ${a.features && a.features.length ? `<ul class="card-features">${a.features.map(f=>`<li>${f}</li>`).join('')}</ul>` : ''}
       <div class="card-tech">${a.tech.map(t=>`<span class="tech-c">${t}</span>`).join('')}</div>
       <div class="card-links">${linksHtml}</div>
       <div class="card-company">${a.company}</div>
@@ -496,7 +554,7 @@ function countTo(el,to,dur=1400){
 }
 const cio = new IntersectionObserver(e=>{
   if(e[0].isIntersecting){
-    countTo(document.getElementById('c1'),15);
+    countTo(document.getElementById('c1'),18);
     countTo(document.getElementById('c2'),170);
     countTo(document.getElementById('c3'),2);
     countTo(document.getElementById('c4'),7);

@@ -403,58 +403,148 @@
       position: relative;
       flex-shrink: 0;
     }
-    .photo-wrap {
+    /* Gradient-border frame — padding trick avoids overflow:hidden clipping ::before */
+    .photo-frame {
       width: clamp(240px, 22vw, 340px);
       aspect-ratio: 2/3;
       border-radius: 999px;
+      padding: 2px;
+      background: linear-gradient(180deg, rgba(2,187,229,.55) 0%, rgba(2,187,229,.08) 55%, rgba(2,187,229,.55) 100%);
+      box-shadow: 0 0 80px rgba(2,187,229,.22), 0 0 160px rgba(2,187,229,.10);
+      position: relative;
+      /* Drop-in entrance animation */
+      animation: photoDropIn .95s cubic-bezier(.34,1.56,.64,1) .55s both;
+    }
+    @keyframes photoDropIn {
+      0%   { opacity:0; transform: translateY(-50px) scale(.85); }
+      70%  { opacity:1; transform: translateY(6px)   scale(1.02); }
+      100% { opacity:1; transform: translateY(0)     scale(1); }
+    }
+    .orbital-scene {
+      animation: orbDropIn 1.2s cubic-bezier(.22,1,.36,1) .85s both;
+    }
+    @keyframes orbDropIn {
+      0%   { opacity:0; transform: translate(-50%,-50%) scale(.55) rotate(-25deg); }
+      100% { opacity:1; transform: translate(-50%,-50%) scale(1)   rotate(0deg); }
+    }
+    .photo-wrap {
+      width: 100%; height: 100%;
+      border-radius: 999px;
       overflow: hidden;
       position: relative;
-      box-shadow: 0 0 80px rgba(2,187,229,.18), 0 0 160px rgba(2,187,229,.08);
-    }
-    .photo-wrap::before {
-      content: '';
-      position: absolute; inset: -2px;
-      border-radius: 999px;
-      background: linear-gradient(180deg, var(--cyan), transparent 60%, var(--cyan) 100%);
-      z-index: 0; opacity: .4;
+      background: var(--surface);
     }
     .photo-wrap img {
-      position: relative; z-index: 1;
       width: 100%; height: 100%;
-      object-fit: cover; object-position: center top;
+      object-fit: cover; object-position: center 15%;
       filter: contrast(1.05) saturate(.95);
+      display: block;
     }
     .photo-wrap::after {
       content: '';
       position: absolute; inset: 0;
       background: linear-gradient(180deg, transparent 55%, rgba(2,187,229,.15) 100%);
-      z-index: 2; border-radius: 999px;
+      border-radius: 999px;
+      pointer-events: none;
     }
-    .photo-badge {
+    /* photo-badge removed — stats shown in hero content area */
+
+    /* ═══════════════════════════════════════════
+       SPLINE-STYLE ORBITAL ANIMATION (hero photo)
+    ═══════════════════════════════════════════ */
+    .orbital-scene {
       position: absolute;
-      bottom: 2rem; right: -1.5rem;
-      background: var(--surface);
-      border: 1px solid var(--border-2);
-      border-radius: var(--radius);
-      padding: .8rem 1.1rem;
-      display: flex; flex-direction: column; gap: .2rem;
-      backdrop-filter: blur(12px);
-      z-index: 3;
+      width: calc(clamp(240px, 22vw, 340px) + 90px);
+      aspect-ratio: 2/3;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 0;
     }
-    .photo-badge-num {
-      font-family: var(--display);
-      font-size: 1.3rem; font-weight: 800;
-      color: var(--cyan); line-height: 1;
-    }
-    .photo-badge-label {
-      font-size: .58rem; font-weight: 600;
-      text-transform: uppercase; letter-spacing: .12em;
-      color: var(--text-3);
-    }
-    .photo-badge-2 {
+    .orbit-layer {
       position: absolute;
-      top: 2.5rem; left: -2rem;
+      inset: -45px;
     }
+    .orbit-ring-wrap {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+    }
+    /* 3 orbital planes at different 3D angles (flatten with scale to simulate perspective) */
+    .orbit-ring-wrap-1 { transform: scaleY(0.26) rotate(-8deg); }
+    .orbit-ring-wrap-2 { transform: scaleY(0.44) rotate(58deg); }
+    .orbit-ring-wrap-3 { transform: scaleX(0.22) rotate(12deg); }
+
+    .orbit-ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+    }
+    .orbit-ring-wrap-1 .orbit-ring { border: 1.5px solid rgba(2,187,229,0.32); }
+    .orbit-ring-wrap-2 .orbit-ring { border: 1px   solid rgba(2,187,229,0.18); }
+    .orbit-ring-wrap-3 .orbit-ring { border: 1px   solid rgba(2,187,229,0.11); }
+
+    .orbit-spinner {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+    }
+    .orbit-ring-wrap-1 .orbit-spinner { animation: orb-cw   8s  linear infinite; }
+    .orbit-ring-wrap-2 .orbit-spinner { animation: orb-ccw  13s linear infinite; }
+    .orbit-ring-wrap-3 .orbit-spinner { animation: orb-cw   20s linear infinite; }
+
+    .orbit-dot {
+      position: absolute;
+      top: 0; left: 50%;
+      width: 7px; height: 7px;
+      background: var(--cyan);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--cyan), 0 0 24px rgba(2,187,229,0.55), 0 0 40px rgba(2,187,229,0.25);
+      transform: translate(-50%, -50%);
+    }
+    .orbit-ring-wrap-2 .orbit-dot { width: 5px; height: 5px; box-shadow: 0 0 8px var(--cyan), 0 0 18px rgba(2,187,229,0.4); }
+    .orbit-ring-wrap-3 .orbit-dot { width: 3px; height: 3px; background: rgba(2,187,229,0.65); box-shadow: 0 0 6px var(--cyan); }
+
+    @keyframes orb-cw  { to { transform: rotate(360deg);  } }
+    @keyframes orb-ccw { to { transform: rotate(-360deg); } }
+
+    /* Floating particle dots */
+    .orb-particle {
+      position: absolute;
+      width: 3px; height: 3px;
+      background: rgba(2,187,229,0.7);
+      border-radius: 50%;
+      box-shadow: 0 0 5px rgba(2,187,229,0.5);
+      animation: pfloat ease-in-out infinite;
+    }
+    .orb-particle:nth-child(1){ top:8%;  left:2%;  animation-duration:4.2s; animation-delay:0s; }
+    .orb-particle:nth-child(2){ top:18%; right:-8%;animation-duration:5.1s; animation-delay:.9s; }
+    .orb-particle:nth-child(3){ top:65%; left:-6%; animation-duration:3.7s; animation-delay:1.6s; }
+    .orb-particle:nth-child(4){ top:82%; right:-3%;animation-duration:6.0s; animation-delay:.4s; }
+    .orb-particle:nth-child(5){ top:42%; right:-12%;animation-duration:4.8s;animation-delay:1.3s; }
+    .orb-particle:nth-child(6){ top:52%; left:-10%;animation-duration:5.6s; animation-delay:2.1s; }
+    .orb-particle:nth-child(7){ top:30%; left:-4%; animation-duration:3.9s; animation-delay:.7s; }
+    .orb-particle:nth-child(8){ top:75%; right:-7%;animation-duration:5.3s; animation-delay:1.8s; }
+    @keyframes pfloat {
+      0%,100%{ transform:translateY(0) scale(1);   opacity:.6; }
+      50%     { transform:translateY(-11px) scale(1.8); opacity:1; }
+    }
+
+    /* ═══════════════════════════════════════════
+       COMPANY PROJECT BADGE (professional work notice)
+    ═══════════════════════════════════════════ */
+    .company-badge {
+      display: inline-flex; align-items: center; gap: .4rem;
+      font-size: .58rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .1em;
+      color: rgba(255,196,40,0.85);
+      background: rgba(255,196,40,0.08);
+      border: 1px solid rgba(255,196,40,0.22);
+      border-radius: 99px;
+      padding: .22rem .75rem;
+      margin-bottom: .85rem;
+    }
+    .company-badge i { font-size: .6rem; }
 
     /* ═══════════════════════════════════════════
        TICKER
@@ -521,14 +611,21 @@
       width: clamp(220px, 20vw, 290px);
       aspect-ratio: 3/4;
       border-radius: 999px;
+      padding: 2px;
+      background: linear-gradient(180deg, rgba(2,187,229,.45) 0%, rgba(2,187,229,.06) 50%, rgba(2,187,229,.45) 100%);
+      box-shadow: 0 0 60px rgba(2,187,229,.14), 0 0 120px rgba(2,187,229,.06);
+    }
+    .about-photo-pill-inner {
+      width: 100%; height: 100%;
+      border-radius: 999px;
       overflow: hidden;
-      border: 1px solid var(--border-2);
-      box-shadow: 0 0 60px rgba(2,187,229,.12);
+      background: var(--surface);
     }
     .about-photo-pill img {
       width: 100%; height: 100%;
       object-fit: cover; object-position: center top;
       filter: contrast(1.06) saturate(.92);
+      display: block;
     }
     .about-availability {
       position: absolute;
@@ -768,13 +865,38 @@
       border-radius: var(--radius);
       overflow: hidden;
       display: flex; flex-direction: column;
-      transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+      transition: transform .45s cubic-bezier(.22,1,.36,1), border-color .3s, box-shadow .45s;
+      position: relative;
+    }
+    /* Shimmer sweep across card on hover */
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -120%;
+      width: 60%; height: 100%;
+      background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,.045) 50%, transparent 60%);
+      transform: skewX(-18deg);
+      transition: left .65s ease;
+      z-index: 10;
+      pointer-events: none;
+    }
+    /* Top-left cyan tint appears on hover */
+    .project-card::after {
+      content: '';
+      position: absolute; inset: 0;
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, rgba(2,187,229,.055) 0%, transparent 55%);
+      opacity: 0;
+      transition: opacity .35s ease;
+      pointer-events: none;
     }
     .project-card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(2,187,229,.3);
-      box-shadow: 0 20px 60px rgba(0,0,0,.4), 0 0 40px rgba(2,187,229,.08);
+      transform: translateY(-10px) scale(1.018);
+      border-color: rgba(2,187,229,.38);
+      box-shadow: 0 28px 70px rgba(0,0,0,.5), 0 0 0 1px rgba(2,187,229,.12), 0 0 55px rgba(2,187,229,.09);
     }
+    .project-card:hover::before { left: 160%; }
+    .project-card:hover::after  { opacity: 1; }
 
     .project-banner {
       height: 140px;
@@ -1156,7 +1278,7 @@
         <a href="#contact"    class="nav-link">Contact</a>
       </div>
 
-      <a href="mailto:jaypanchal4498@gmail.com" class="nav-cta">
+      <a href="mailto:jaypanchal4498@gmail.com?subject=Hiring%20Inquiry%20%E2%80%94%20Flutter%20Developer&body=Hi%20Jay%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20I%27m%20interested%20in%20discussing%20a%20Flutter%20development%20opportunity%20with%20you.%0A%0ALooking%20forward%20to%20connecting%21" class="nav-cta">
         <i class="fa-solid fa-paper-plane"></i> Hire Me
       </a>
 
@@ -1214,7 +1336,7 @@
           <a href="#projects" class="btn btn-primary">
             <i class="fa-solid fa-rocket"></i> View Projects
           </a>
-          <a href="mailto:jaypanchal4498@gmail.com" class="btn btn-outline">
+          <a href="mailto:jaypanchal4498@gmail.com?subject=Hiring%20Inquiry%20%E2%80%94%20Flutter%20Developer&body=Hi%20Jay%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20I%27m%20interested%20in%20discussing%20a%20Flutter%20development%20opportunity%20with%20you.%0A%0ALooking%20forward%20to%20connecting%21" class="btn btn-outline">
             <i class="fa-solid fa-envelope"></i> Hire Me
           </a>
         </div>
@@ -1236,18 +1358,37 @@
       </div>
 
       <div class="hero-visual rv d2">
-        <div class="photo-wrap">
-          <img src="images/jay-panchal.jpg"
-               alt="Jay Panchal — Senior Flutter Developer Mumbai"
-               onerror="this.parentElement.style.background='linear-gradient(160deg,#0d1f2a,#02BBE5)'">
+        <!-- Spline-style orbital animation -->
+        <div class="orbital-scene" aria-hidden="true">
+          <div class="orbit-layer">
+            <div class="orbit-ring-wrap orbit-ring-wrap-1">
+              <div class="orbit-ring"></div>
+              <div class="orbit-spinner"><div class="orbit-dot"></div></div>
+            </div>
+            <div class="orbit-ring-wrap orbit-ring-wrap-2">
+              <div class="orbit-ring"></div>
+              <div class="orbit-spinner"><div class="orbit-dot"></div></div>
+            </div>
+            <div class="orbit-ring-wrap orbit-ring-wrap-3">
+              <div class="orbit-ring"></div>
+              <div class="orbit-spinner"><div class="orbit-dot"></div></div>
+            </div>
+          </div>
+          <div class="orb-particle"></div>
+          <div class="orb-particle"></div>
+          <div class="orb-particle"></div>
+          <div class="orb-particle"></div>
+          <div class="orb-particle"></div>
+          <div class="orb-particle"></div>
+          <div class="orb-particle"></div>
+          <div class="orb-particle"></div>
         </div>
-        <div class="photo-badge">
-          <div class="photo-badge-num">15K+</div>
-          <div class="photo-badge-label">Downloads</div>
-        </div>
-        <div class="photo-badge photo-badge-2">
-          <div class="photo-badge-num">4K+</div>
-          <div class="photo-badge-label">Daily Users</div>
+        <div class="photo-frame">
+          <div class="photo-wrap">
+            <img src="images/jay-panchal.jpg"
+                 alt="Jay Panchal — Senior Flutter Developer Mumbai"
+                 onerror="this.parentElement.style.background='linear-gradient(160deg,#0d1f2a,#02BBE5)'">
+          </div>
         </div>
       </div>
     </div>
@@ -1286,9 +1427,11 @@
     <div class="about-grid">
       <div class="about-photo-side rv">
         <div class="about-photo-pill">
-          <img src="images/jay-panchal.jpg"
-               alt="Jay Panchal Mobile App Developer"
-               onerror="this.parentElement.style.background='linear-gradient(160deg,#0d1f2a,#02BBE5)'">
+          <div class="about-photo-pill-inner">
+            <img src="images/jay-panchal.jpg"
+                 alt="Jay Panchal Mobile App Developer"
+                 onerror="this.parentElement.parentElement.style.background='linear-gradient(160deg,#0d1f2a,#02BBE5)'">
+          </div>
         </div>
         <div class="about-availability">
           <div class="avail-dot"></div>
@@ -1344,7 +1487,7 @@
           <a href="#projects" class="btn btn-primary">
             <i class="fa-solid fa-mobile-screen"></i> View My Work
           </a>
-          <a href="mailto:jaypanchal4498@gmail.com" class="btn btn-outline">
+          <a href="mailto:jaypanchal4498@gmail.com?subject=Hiring%20Inquiry%20%E2%80%94%20Flutter%20Developer&body=Hi%20Jay%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20I%27m%20interested%20in%20discussing%20a%20Flutter%20development%20opportunity%20with%20you.%0A%0ALooking%20forward%20to%20connecting%21" class="btn btn-outline">
             <i class="fa-solid fa-envelope"></i> Send Email
           </a>
         </div>
@@ -1592,7 +1735,7 @@
           <div style="font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.15em;color:var(--text-3);margin-top:.2rem">Total Downloads</div>
         </div>
         <div>
-          <div style="font-family:var(--display);font-size:2rem;font-weight:800;letter-spacing:-.05em;line-height:1">15+</div>
+          <div style="font-family:var(--display);font-size:2rem;font-weight:800;letter-spacing:-.05em;line-height:1">18+</div>
           <div style="font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.15em;color:var(--text-3);margin-top:.2rem">Apps Shipped</div>
         </div>
         <div>
@@ -1604,7 +1747,7 @@
           <div style="font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.15em;color:var(--text-3);margin-top:.2rem">Platforms</div>
         </div>
       </div>
-      <a href="projects.html" class="btn btn-primary" style="flex-shrink:0"><i class="fa-solid fa-grid-2"></i> View All 15 Apps</a>
+      <a href="projects.html" class="btn btn-primary" style="flex-shrink:0"><i class="fa-solid fa-table-cells"></i> View All 18 Apps</a>
     </div>
 
     <!-- 6 APP PREVIEW GRID -->
@@ -1620,6 +1763,7 @@
         <div class="project-body">
           <div class="project-name">AmulAMCS Farmers</div>
           <div class="project-subtitle">Dairy Farmer Management · Amul India</div>
+          <div class="company-badge"><i class="fa-solid fa-building"></i> Built during employment @ MindTech Solutions</div>
           <div class="project-stats">
             <div class="pstat highlight"><i class="fa-solid fa-download"></i> 100,000+ Downloads</div>
             <div class="pstat"><i class="fa-brands fa-android"></i> Android</div>
@@ -1644,6 +1788,7 @@
         <div class="project-body">
           <div class="project-name">Goa Taxi</div>
           <div class="project-subtitle">Passenger Ride-Hailing Platform</div>
+          <div class="company-badge"><i class="fa-solid fa-building"></i> Built during employment @ WaytoWeb</div>
           <div class="project-stats">
             <div class="pstat highlight"><i class="fa-solid fa-download"></i> 50,000+ Downloads</div>
             <div class="pstat"><i class="fa-solid fa-star"></i> 3.6★</div>
@@ -1668,6 +1813,7 @@
         <div class="project-body">
           <div class="project-name">AmulAMCS Societies</div>
           <div class="project-subtitle">Dairy Society Supervisor App</div>
+          <div class="company-badge"><i class="fa-solid fa-building"></i> Built during employment @ MindTech Solutions</div>
           <div class="project-stats">
             <div class="pstat highlight"><i class="fa-solid fa-download"></i> 10,000+ Downloads</div>
             <div class="pstat"><i class="fa-solid fa-star"></i> 4.1★</div>
@@ -1692,9 +1838,10 @@
         <div class="project-body">
           <div class="project-name">AASAN</div>
           <div class="project-subtitle">BLE Milk Collection System</div>
+          <div class="company-badge"><i class="fa-solid fa-building"></i> Built during employment @ MindTech Solutions</div>
           <div class="project-stats">
             <div class="pstat highlight"><i class="fa-brands fa-bluetooth-b"></i> BLE Hardware</div>
-            <div class="pstat"><i class="fa-solid fa-wifi-slash"></i> Offline-First</div>
+            <div class="pstat"><i class="fa-solid fa-database"></i> Offline-First</div>
           </div>
           <p class="project-desc">Integrates with BLE milk fat analyzers via Bluetooth. Offline data collection, thermal printing, auto PDF/Excel exports.</p>
           <div class="project-tech">
@@ -1760,7 +1907,7 @@
     <!-- VIEW ALL CTA -->
     <div class="rv" style="text-align:center;margin-top:2.5rem">
       <a href="projects.html" class="btn btn-outline" style="font-size:1rem;padding:1rem 2.5rem">
-        <i class="fa-solid fa-grid-2"></i> View All 15 Apps &amp; Projects →
+        <i class="fa-solid fa-table-cells"></i> View All 18 Apps &amp; Projects →
       </a>
     </div>
   </div>
@@ -1818,7 +1965,7 @@
             <div class="ci-icon"><i class="fa-solid fa-envelope"></i></div>
             <div>
               <span class="ci-label">Email</span>
-              <a href="mailto:jaypanchal4498@gmail.com">
+              <a href="mailto:jaypanchal4498@gmail.com?subject=Hiring%20Inquiry%20%E2%80%94%20Flutter%20Developer&body=Hi%20Jay%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20I%27m%20interested%20in%20discussing%20a%20Flutter%20development%20opportunity%20with%20you.%0A%0ALooking%20forward%20to%20connecting%21">
                 <span class="ci-val">jaypanchal4498@gmail.com</span>
               </a>
             </div>
@@ -1880,7 +2027,7 @@
               Drop me an email and I'll get back to you within 24 hours.
             </div>
           </div>
-          <a href="mailto:jaypanchal4498@gmail.com" class="btn btn-primary" style="flex-shrink:0">
+          <a href="mailto:jaypanchal4498@gmail.com?subject=Hiring%20Inquiry%20%E2%80%94%20Flutter%20Developer&body=Hi%20Jay%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20I%27m%20interested%20in%20discussing%20a%20Flutter%20development%20opportunity%20with%20you.%0A%0ALooking%20forward%20to%20connecting%21" class="btn btn-primary" style="flex-shrink:0">
             <i class="fa-solid fa-paper-plane"></i> Email Me
           </a>
         </div>
