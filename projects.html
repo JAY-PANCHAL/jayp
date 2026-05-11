@@ -73,12 +73,12 @@
     @media(max-width:580px){.app-grid{grid-template-columns:1fr}}
 
     /* APP CARD */
-    .app-card{background:var(--sur);border:1px solid var(--bd);border-radius:var(--r);display:flex;flex-direction:column;transition:transform .4s cubic-bezier(.34,1.2,.64,1),border-color .28s,box-shadow .28s;cursor:pointer}
+    .app-card{background:var(--sur);border:1px solid var(--bd);border-radius:var(--r);display:flex;flex-direction:column;transition:transform .4s cubic-bezier(.34,1.2,.64,1),border-color .28s,box-shadow .28s;cursor:pointer;max-width:100%;overflow:hidden}
     .app-card:hover{transform:translateY(-5px);border-color:rgba(2,187,229,.28);box-shadow:0 18px 55px rgba(0,0,0,.4),0 0 35px rgba(2,187,229,.07)}
     .app-card.hidden{display:none}
 
     /* CARD SCREENSHOT AREA */
-    .card-img{position:relative;height:200px;overflow:hidden;background:var(--sur2)}
+    .card-img{position:relative;height:200px;overflow:hidden;background:var(--sur2);flex-shrink:0}
     .card-shot{width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .5s ease}
     .app-card:hover .card-shot{transform:scale(1.04)}
     .card-grad{position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.65) 100%);pointer-events:none}
@@ -90,7 +90,7 @@
     .card-img-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem}
 
     /* CARD BODY */
-    .card-body{padding:1.2rem;display:flex;flex-direction:column;flex:1}
+    .card-body{padding:1.2rem;display:flex;flex-direction:column;flex:1;min-width:0;overflow:hidden}
     .card-title{font-family:var(--ff);font-size:1.05rem;font-weight:800;letter-spacing:-.03em;color:var(--tx);margin-bottom:.2rem}
     .card-sub{font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--cyan);margin-bottom:.9rem}
     .card-meta{display:flex;align-items:center;gap:1rem;margin-bottom:.8rem}
@@ -158,11 +158,98 @@
     .foot-copy{font-size:.65rem;color:var(--tx4)}
     .foot-copy span{color:rgba(2,187,229,.5)}
 
-    @media(max-width:640px){
-      .ph-h1{font-size:2.5rem}
-      .filter-bar{position:relative;top:auto}
-      .page-head{padding:2.5rem 0 2rem}
-      .nav-in{gap:.8rem}
+    /* ── Tablet ≤ 768px ── */
+    @media(max-width:768px){
+      .wrap{padding:0 1.2rem}
+      .app-grid{gap:1rem}
+      .card-body{padding:1rem}
+      .card-title{font-size:.97rem}
+      .card-tech{gap:.28rem}
+      .tech-c{font-size:.52rem;padding:.14rem .46rem}
+      .store-btn{font-size:.6rem;padding:.42rem .75rem}
+      .card-links{flex-wrap:wrap;gap:.4rem}
+    }
+
+    /* ── Mobile ≤ 580px (single column already) ── */
+    @media(max-width:580px){
+      .wrap{padding:0 1rem}
+      .page-head{padding:2rem 0 1.5rem}
+      .ph-h1{font-size:clamp(2rem,10vw,2.8rem);letter-spacing:-.04em}
+      .ph-sub{font-size:.87rem}
+      .ph-stats{gap:1rem;flex-wrap:wrap}
+      .ph-stat-num{font-size:1.4rem}
+      .ph-stat-label{font-size:.55rem}
+
+      /* Filter bar */
+      .filter-bar{position:relative;top:auto;padding:1rem 0 .8rem}
+      .ftab{font-size:.62rem;padding:.38rem .8rem}
+
+      /* Nav */
+      .nav-in{gap:.5rem}
+      .nav-logo{font-size:.9rem}
+      .nav-back{font-size:.65rem}
+      .nav-count{font-size:.6rem;padding:.2rem .55rem}
+
+      /* Grid */
+      .app-grid{grid-template-columns:1fr;gap:.9rem;padding:1.8rem 0 3.5rem}
+
+      /* Card image */
+      .card-img{height:170px}
+      .special-banner{height:170px}
+
+      /* Card body — tighten everything */
+      .card-body{padding:.9rem}
+      .card-title{font-size:.95rem;letter-spacing:-.02em;word-break:break-word}
+      .card-sub{font-size:.62rem;margin-bottom:.65rem;word-break:break-word}
+      .card-desc{font-size:.78rem;line-height:1.55;-webkit-line-clamp:3}
+      .card-meta{gap:.65rem;margin-bottom:.6rem}
+      .card-installs{font-size:.67rem}
+      .card-rating{font-size:.67rem}
+
+      /* Tech chips — smaller, wrap cleanly */
+      .card-tech{gap:.25rem;margin-bottom:.75rem}
+      .tech-c{font-size:.5rem;padding:.12rem .42rem;letter-spacing:.04em}
+
+      /* Store buttons — stack or shrink */
+      .card-links{flex-wrap:wrap;gap:.4rem;margin-top:.5rem}
+      .store-btn{font-size:.58rem;padding:.4rem .7rem;gap:.32rem}
+      .store-btn i{font-size:.65rem}
+
+      /* Company badge */
+      .company-badge{font-size:.5rem;padding:.16rem .5rem;gap:.28rem;flex-wrap:wrap;word-break:break-word}
+
+      /* Features list */
+      .card-features li{font-size:.67rem;line-height:1.45}
+      .card-features{gap:.25rem;margin-bottom:.75rem}
+
+      /* Card company line at bottom */
+      .card-company{font-size:.55rem}
+
+      /* Lightbox on small screens */
+      .lb-shot{width:85vw}
+      .lb-inner{padding:0 .5rem}
+      .lb-app-name{font-size:1.1rem}
+
+      /* Footer */
+      .foot-in{flex-direction:column;text-align:center}
+    }
+
+    /* ── Small phones ≤ 420px ── */
+    @media(max-width:420px){
+      .ph-h1{font-size:clamp(1.8rem,9vw,2.4rem)}
+      .card-body{padding:.8rem}
+      .card-title{font-size:.9rem}
+      .tech-c{font-size:.48rem;padding:.1rem .38rem}
+      .store-btn{font-size:.55rem;padding:.38rem .6rem}
+      .card-links{gap:.3rem}
+      .ph-stats{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+    }
+
+    /* ── Disable 3D tilt on touch devices ── */
+    @media(hover:none){
+      .app-card:hover{transform:none}
+      #cr,#cd{display:none}
+      body{cursor:auto}
     }
   </style>
 </head>
