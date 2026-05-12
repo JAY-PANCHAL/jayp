@@ -112,8 +112,8 @@
     .card-company::before{content:'';display:block;width:4px;height:4px;border-radius:50%;background:var(--tx4);flex-shrink:0}
 
     /* COMPANY PROJECT BADGE */
-    .company-badge{display:inline-flex;align-items:center;gap:.4rem;font-size:.56rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,196,40,.85);background:rgba(255,196,40,.08);border:1px solid rgba(255,196,40,.22);border-radius:99px;padding:.2rem .65rem;margin-bottom:.7rem}
-    .company-badge i{font-size:.58rem}
+    .company-badge{display:inline-flex;align-items:center;gap:.4rem;font-size:.56rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,196,40,.85);background:rgba(255,196,40,.08);border:1px solid rgba(255,196,40,.22);border-radius:99px;padding:.2rem .65rem;margin-bottom:.7rem;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .company-badge i{font-size:.58rem;flex-shrink:0}
 
     /* CARD SHIMMER HOVER */
     .app-card{position:relative;overflow:hidden;transition:transform .45s cubic-bezier(.22,1,.36,1),border-color .3s,box-shadow .45s}
@@ -124,9 +124,10 @@
     .app-card:hover::after{opacity:1}
 
     /* FEATURES LIST on private cards */
-    .card-features{list-style:none;display:flex;flex-direction:column;gap:.3rem;margin-bottom:.9rem;padding:0}
-    .card-features li{font-size:.72rem;color:var(--tx2);line-height:1.5;display:flex;align-items:flex-start;gap:.45rem}
+    .card-features{list-style:none;display:flex;flex-direction:column;gap:.3rem;margin-bottom:.9rem;padding:0;width:100%}
+    .card-features li{font-size:.72rem;color:var(--tx2);line-height:1.5;display:flex;align-items:flex-start;gap:.45rem;min-width:0;word-break:break-word;overflow-wrap:break-word}
     .card-features li::before{content:'→';color:var(--cyan);font-size:.65rem;flex-shrink:0;margin-top:.1rem}
+    .card-features li span{flex:1;min-width:0}
 
     /* SPECIAL CARD (no screenshots) */
     .special-banner{height:200px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.8rem;position:relative;overflow:hidden}
@@ -163,91 +164,107 @@
       .wrap{padding:0 1.2rem}
       .app-grid{gap:1rem}
       .card-body{padding:1rem}
-      .card-title{font-size:.97rem}
+      .card-title{font-size:.97rem;word-break:break-word;overflow-wrap:break-word}
       .card-tech{gap:.28rem}
       .tech-c{font-size:.52rem;padding:.14rem .46rem}
       .store-btn{font-size:.6rem;padding:.42rem .75rem}
       .card-links{flex-wrap:wrap;gap:.4rem}
     }
 
-    /* ── Mobile ≤ 580px (single column already) ── */
+    /* ── Mobile ≤ 580px ── */
     @media(max-width:580px){
-      .wrap{padding:0 1rem}
+      /* Layout */
+      .wrap{padding:0 .9rem}
       .page-head{padding:2rem 0 1.5rem}
+
+      /* Page heading */
       .ph-h1{font-size:clamp(2rem,10vw,2.8rem);letter-spacing:-.04em}
-      .ph-sub{font-size:.87rem}
-      .ph-stats{gap:1rem;flex-wrap:wrap}
-      .ph-stat-num{font-size:1.4rem}
-      .ph-stat-label{font-size:.55rem}
+      .ph-sub{font-size:.85rem;line-height:1.6}
+
+      /* Stats row — 3-across on mobile */
+      .ph-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem 1rem;flex-wrap:wrap}
+      .ph-stat-num{font-size:1.35rem}
+      .ph-stat-label{font-size:.52rem;letter-spacing:.08em}
 
       /* Filter bar */
       .filter-bar{position:relative;top:auto;padding:1rem 0 .8rem}
-      .ftab{font-size:.62rem;padding:.38rem .8rem}
+      .ftab{font-size:.6rem;padding:.35rem .75rem}
 
       /* Nav */
       .nav-in{gap:.5rem}
       .nav-logo{font-size:.9rem}
-      .nav-back{font-size:.65rem}
-      .nav-count{font-size:.6rem;padding:.2rem .55rem}
+      .nav-back{font-size:.63rem;letter-spacing:.06em}
+      .nav-count{font-size:.58rem;padding:.18rem .5rem}
 
       /* Grid */
       .app-grid{grid-template-columns:1fr;gap:.9rem;padding:1.8rem 0 3.5rem}
 
       /* Card image */
-      .card-img{height:170px}
-      .special-banner{height:170px}
+      .card-img{height:170px;flex-shrink:0}
+      .special-banner{height:160px}
 
-      /* Card body — tighten everything */
-      .card-body{padding:.9rem}
-      .card-title{font-size:.95rem;letter-spacing:-.02em;word-break:break-word}
-      .card-sub{font-size:.62rem;margin-bottom:.65rem;word-break:break-word}
-      .card-desc{font-size:.78rem;line-height:1.55;-webkit-line-clamp:3}
-      .card-meta{gap:.65rem;margin-bottom:.6rem}
-      .card-installs{font-size:.67rem}
-      .card-rating{font-size:.67rem}
+      /* Card body — all text contained, nothing overflows */
+      .card-body{padding:.85rem;min-width:0;overflow:hidden}
+      .card-title{font-size:.93rem;letter-spacing:-.02em;word-break:break-word;overflow-wrap:break-word;white-space:normal}
+      .card-sub{font-size:.6rem;margin-bottom:.65rem;word-break:break-word;overflow-wrap:break-word;white-space:normal;letter-spacing:.05em}
+      .card-desc{font-size:.77rem;line-height:1.55;-webkit-line-clamp:3;margin-bottom:.75rem}
+      .card-meta{gap:.6rem;margin-bottom:.55rem;flex-wrap:wrap}
+      .card-installs{font-size:.65rem}
+      .card-rating{font-size:.65rem}
 
-      /* Tech chips — smaller, wrap cleanly */
-      .card-tech{gap:.25rem;margin-bottom:.75rem}
-      .tech-c{font-size:.5rem;padding:.12rem .42rem;letter-spacing:.04em}
+      /* Company badge — truncate gracefully */
+      .company-badge{font-size:.5rem;padding:.15rem .45rem;gap:.25rem;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:.6rem}
 
-      /* Store buttons — stack or shrink */
-      .card-links{flex-wrap:wrap;gap:.4rem;margin-top:.5rem}
-      .store-btn{font-size:.58rem;padding:.4rem .7rem;gap:.32rem}
-      .store-btn i{font-size:.65rem}
+      /* Tech chips */
+      .card-tech{gap:.22rem;margin-bottom:.7rem;flex-wrap:wrap}
+      .tech-c{font-size:.49rem;padding:.11rem .4rem;letter-spacing:.04em;white-space:nowrap}
 
-      /* Company badge */
-      .company-badge{font-size:.5rem;padding:.16rem .5rem;gap:.28rem;flex-wrap:wrap;word-break:break-word}
+      /* Features list — prevent any text overflow */
+      .card-features{gap:.22rem;margin-bottom:.7rem;width:100%}
+      .card-features li{font-size:.66rem;line-height:1.45;min-width:0;word-break:break-word;overflow-wrap:break-word}
 
-      /* Features list */
-      .card-features li{font-size:.67rem;line-height:1.45}
-      .card-features{gap:.25rem;margin-bottom:.75rem}
+      /* Store buttons — always wrap, never clip */
+      .card-links{flex-wrap:wrap;gap:.38rem;margin-top:.5rem}
+      .store-btn{font-size:.57rem;padding:.38rem .65rem;gap:.3rem;flex-shrink:1;min-width:0;white-space:nowrap}
+      .store-btn i{font-size:.62rem}
 
-      /* Card company line at bottom */
-      .card-company{font-size:.55rem}
+      /* Card company bottom line */
+      .card-company{font-size:.52rem;word-break:break-word;overflow-wrap:break-word}
 
-      /* Lightbox on small screens */
+      /* Lightbox */
       .lb-shot{width:85vw}
       .lb-inner{padding:0 .5rem}
-      .lb-app-name{font-size:1.1rem}
+      .lb-app-name{font-size:1.05rem}
 
       /* Footer */
-      .foot-in{flex-direction:column;text-align:center}
+      .foot-in{flex-direction:column;text-align:center;gap:.6rem}
+      .foot-copy{font-size:.6rem}
     }
 
     /* ── Small phones ≤ 420px ── */
     @media(max-width:420px){
-      .ph-h1{font-size:clamp(1.8rem,9vw,2.4rem)}
-      .card-body{padding:.8rem}
-      .card-title{font-size:.9rem}
-      .tech-c{font-size:.48rem;padding:.1rem .38rem}
-      .store-btn{font-size:.55rem;padding:.38rem .6rem}
+      .wrap{padding:0 .7rem}
+      .ph-h1{font-size:clamp(1.75rem,9vw,2.2rem)}
+      /* Stats: 2-across grid on tiny screens */
+      .ph-stats{grid-template-columns:repeat(2,1fr);gap:.65rem}
+      .ph-stat-num{font-size:1.2rem}
+
+      .card-body{padding:.75rem}
+      .card-title{font-size:.88rem}
+      .card-sub{font-size:.56rem}
+      .card-desc{font-size:.74rem}
+
+      .tech-c{font-size:.46rem;padding:.09rem .35rem}
+      .store-btn{font-size:.53rem;padding:.35rem .55rem}
       .card-links{gap:.3rem}
-      .ph-stats{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+
+      .card-features li{font-size:.63rem}
+      .special-banner{height:145px}
     }
 
     /* ── Disable 3D tilt on touch devices ── */
     @media(hover:none){
-      .app-card:hover{transform:none}
+      .app-card,.app-card:hover{transform:none !important;box-shadow:none}
       #cr,#cd{display:none}
       body{cursor:auto}
     }
@@ -279,6 +296,10 @@
       <div class="ph-stat">
         <div class="ph-stat-num"><span id="c1">0</span>+</div>
         <div class="ph-stat-label">Apps Shipped</div>
+      </div>
+      <div class="ph-stat">
+        <div class="ph-stat-num"><span id="c5">0</span>+</div>
+        <div class="ph-stat-label">Apps Worked On</div>
       </div>
       <div class="ph-stat">
         <div class="ph-stat-num"><span id="c2">0</span>K+</div>
@@ -584,7 +605,7 @@ function renderCard(a, idx){
         ${ratingHtml}
       </div>
       <p class="card-desc">${a.desc}</p>
-      ${a.features && a.features.length ? `<ul class="card-features">${a.features.map(f=>`<li>${f}</li>`).join('')}</ul>` : ''}
+      ${a.features && a.features.length ? `<ul class="card-features">${a.features.map(f=>`<li><span>${f}</span></li>`).join('')}</ul>` : ''}
       <div class="card-tech">${a.tech.map(t=>`<span class="tech-c">${t}</span>`).join('')}</div>
       <div class="card-links">${linksHtml}</div>
       <div class="card-company">${a.company}</div>
@@ -642,6 +663,7 @@ function countTo(el,to,dur=1400){
 const cio = new IntersectionObserver(e=>{
   if(e[0].isIntersecting){
     countTo(document.getElementById('c1'),18);
+    countTo(document.getElementById('c5'),35);
     countTo(document.getElementById('c2'),170);
     countTo(document.getElementById('c3'),2);
     countTo(document.getElementById('c4'),7);
