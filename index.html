@@ -1515,26 +1515,19 @@
       .pstat        { font-size: .58rem; }
     }
 
-    /* ── Index Lightbox ─────────────────────────────────── */
-    #idx-lb{display:none;position:fixed;inset:0;z-index:9000;align-items:center;justify-content:center}
+    /* ── Index Lightbox (screenshot gallery, mirrors projects.html) ── */
+    #idx-lb{position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,.92);backdrop-filter:blur(20px);display:none;align-items:center;justify-content:center;padding:2rem;overflow-y:auto}
     #idx-lb.open{display:flex}
-    #idx-lb-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(8px)}
-    #idx-lb-modal{position:relative;z-index:1;background:#111;border:1px solid rgba(255,255,255,.1);border-radius:16px;width:min(520px,92vw);max-height:88vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.8)}
-    #idx-lb-close{position:absolute;top:12px;right:14px;z-index:2;background:rgba(0,0,0,.55);border:none;color:#fff;font-size:1.5rem;width:34px;height:34px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;transition:background .2s}
-    #idx-lb-close:hover{background:rgba(255,255,255,.15)}
-    #idx-lb-banner{position:relative;height:210px;border-radius:16px 16px 0 0;overflow:hidden}
-    .idx-lb-shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;opacity:.55}
-    .idx-lb-icon{position:absolute;bottom:14px;left:16px;width:56px;height:56px;border-radius:12px;border:2px solid rgba(255,255,255,.25);z-index:1;box-shadow:0 4px 16px rgba(0,0,0,.5)}
-    #idx-lb-body{padding:1.2rem 1.4rem 1.6rem}
-    #idx-lb-name{font-size:1.2rem;font-weight:700;color:#fff;margin-bottom:.2rem}
-    #idx-lb-sub{font-size:.78rem;color:rgba(255,255,255,.45);margin-bottom:.9rem}
-    #idx-lb-desc{font-size:.87rem;color:rgba(255,255,255,.72);line-height:1.65;margin:0 0 .9rem}
-    #idx-lb-tech{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:.9rem}
-    #idx-lb-links{display:flex;gap:.6rem;flex-wrap:wrap}
-    #idx-lb-links .plink{padding:.5rem 1rem;border-radius:8px;font-size:.82rem;text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;font-weight:600;transition:opacity .2s}
-    #idx-lb-links .plink:hover{opacity:.8}
-    #idx-lb-links .plink.primary{background:var(--accent,#02bbe5);color:#000}
-    #idx-lb-links .plink:not(.primary){background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.12)}
+    .idx-lb-inner{max-width:900px;width:100%;position:relative;margin:auto}
+    .idx-lb-close{position:absolute;top:-3rem;right:0;background:none;border:1px solid var(--border-2);border-radius:50%;width:34px;height:34px;display:grid;place-items:center;color:var(--text-2);cursor:pointer;transition:all .2s;z-index:10}
+    .idx-lb-close:hover{border-color:var(--cyan);color:var(--cyan)}
+    .idx-lb-name{font-family:var(--display);font-size:1.3rem;font-weight:800;letter-spacing:-.04em;margin-bottom:1.2rem;text-align:center}
+    .idx-lb-shots{display:flex;gap:1rem;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:.5rem;scrollbar-width:none}
+    .idx-lb-shots::-webkit-scrollbar{display:none}
+    .idx-lb-shot{flex-shrink:0;width:calc(33.33% - .67rem);min-width:200px;border-radius:var(--radius);overflow:hidden;scroll-snap-align:start;border:1px solid var(--border-2)}
+    .idx-lb-shot img{width:100%;display:block;max-height:560px;object-fit:cover;object-position:top}
+    .idx-lb-info{margin-top:1.2rem;display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center}
+    @media(max-width:768px){.idx-lb-shot{width:80vw}.idx-lb-inner{padding:0}}
   </style>
 </head>
 <body>
@@ -2657,23 +2650,51 @@
     a.rel = 'noopener';
   });
 
-  /* ── Index page lightbox for featured project cards ── */
+  /* ── Index page lightbox — screenshot gallery (same as projects.html) ── */
   (function(){
-    // Inject modal HTML
-    const lb = document.createElement('div');
+    /* App data for the 6 featured cards — same order as cards in HTML */
+    var IDX_APPS = [
+      {
+        title:'AmulAMCS Farmers',
+        shots:['https://play-lh.googleusercontent.com/w09rvau7W2jyi7TYL7V209oo9fgTOTplPSk5B4C36I3LA0A-qDeKWgR7C8CRbLTUdhjJ=w392','https://play-lh.googleusercontent.com/V5eLIuuzIcbmP1F1nt5Xwemdlfpnpy_ScA_bq5HWi7y84nFXaNrHCl1jEdtu-jteATw=w392','https://play-lh.googleusercontent.com/nsSRUkCbo115Xay4ixWDhyk95mWV-Za0POV8nXXJj3SBKLqPpdFer_XfzDKa1sh5miM=w392'],
+        tech:['Flutter','Firebase','REST API','BLoC','SQLite','FCM'],
+      },
+      {
+        title:'Goa Taxi',
+        shots:['https://play-lh.googleusercontent.com/S40HrE-cygDEiah0GvNJeTBpBpAdn78RmNOttlnqQlS4449S1P9kn7OiWuS6-FSvgg=w392','https://play-lh.googleusercontent.com/13eB5aM3HZ04WR-teNQTiD5e5r4UkN3VujA9ICv0xxL55irKFb9p1hmDMBnpZq6Dyg=w392','https://play-lh.googleusercontent.com/WKSzu3EFUojfelbJF8hlPrSOKUpBbP1Ss541efYCZBaMOdipZNzsQhmAQP9t8Gtgjicx=w392'],
+        tech:['Flutter','Firebase','Google Maps','GetX','Razorpay','FCM','REST API'],
+      },
+      {
+        title:'AmulAMCS Societies',
+        shots:['https://play-lh.googleusercontent.com/bVNlncoV6CmxoEfU-c2w0u-HSn1oQUY4ykTcD9b2X1zJliMSFL01hv2rWxALoCtWDISY=w392','https://play-lh.googleusercontent.com/1cCPG4kjR6UplzoHRIDszaBrBJAJ-w-ipZ-x6YXmonpz4cVZ5EF7wE6J3xNFWV1yAQ=w392','https://play-lh.googleusercontent.com/Eo0q4uuqDsbMp06WFi4pqFMzelI-d-vcELzjB1ifGbT-JkDaPDAKldIxlaZtaPYw4nRN=w392'],
+        tech:['Flutter','Firebase','REST API','SQLite','BLoC'],
+      },
+      {
+        title:'AASAN',
+        shots:['https://play-lh.googleusercontent.com/iZKRBuWrKqzpxsk5K_WgrXphy_AYMrDWCR1COofbznb4LQlsP0_0sMoUh4lAH8Pxtg=w392','https://play-lh.googleusercontent.com/bRCA40enYpkY8VAFMW2CGP7E2w59vouAQRk6FvKjp490yX-Oiux1n1Bj2pnvXPvIFaTO=w392','https://play-lh.googleusercontent.com/xbCzqw_iMQZQnY4dwfWLyyXKNU10PV5WHoI0wbLDdOgrbY5um0gBLLONbwp08hcBWA=w392'],
+        tech:['Flutter','SQLite','BLE','BT Thermal Print','PDF Export','Excel Export'],
+      },
+      {
+        title:'JainIsta',
+        shots:['https://is1-ssl.mzstatic.com/image/thumb/PurpleSource116/v4/59/9e/7f/599e7f0d-6bcd-b4c6-0081-26c0b7698571/aa029fc8-9ec1-456c-9968-2c3441f1c55d_1-1242.jpg/392x696bb.jpg','https://is1-ssl.mzstatic.com/image/thumb/PurpleSource116/v4/6d/68/55/6d6855cf-b02a-ed60-1c43-d78f3cc5f39f/b32da66c-ff38-4b8c-843a-e1b57619a272_2-1242.jpg/392x696bb.jpg','https://is1-ssl.mzstatic.com/image/thumb/PurpleSource116/v4/45/de/75/45de751d-ddfe-2d1a-f7ca-e430969b322c/5b4a328b-c4b1-408e-adc1-0a8754dedd54_3-1242.jpg/392x696bb.jpg'],
+        tech:['Flutter','Firebase','Social Auth','Deep Linking','Push Notifications'],
+      },
+      {
+        title:'AKG Setu',
+        shots:['https://play-lh.googleusercontent.com/wy6f4RzGZ8PcM7aAdntH_aHPoVCOxMlFr3azveoW5sUYH-BA9IM75lHBzI4Wo6EX54s=w392','https://play-lh.googleusercontent.com/CGgeL7ttuCp_aWXmpkSDCNIVz6O4S7xLQumZPiE93yU610qh9vZ9jsYX3ptn5iVKKA=w392','https://play-lh.googleusercontent.com/aX-Io8f-raduVrGS1klAv3wP7fI8EF5SAPWJpCGBJDQ42S1lWsgXW5SKGB8aimcpXNfN=w392'],
+        tech:['Flutter','Firebase','SQLite','REST API','GetX','Inventory'],
+      },
+    ];
+
+    /* Build modal */
+    var lb = document.createElement('div');
     lb.id = 'idx-lb';
     lb.innerHTML =
-      '<div id="idx-lb-backdrop"></div>' +
-      '<div id="idx-lb-modal">' +
-        '<button id="idx-lb-close" aria-label="Close">&times;</button>' +
-        '<div id="idx-lb-banner"></div>' +
-        '<div id="idx-lb-body">' +
-          '<div id="idx-lb-name"></div>' +
-          '<div id="idx-lb-sub"></div>' +
-          '<p id="idx-lb-desc"></p>' +
-          '<div id="idx-lb-tech"></div>' +
-          '<div id="idx-lb-links"></div>' +
-        '</div>' +
+      '<div class="idx-lb-inner">' +
+        '<button class="idx-lb-close" id="idx-lb-close"><i class="fa-solid fa-xmark"></i></button>' +
+        '<div class="idx-lb-name" id="idx-lb-name"></div>' +
+        '<div class="idx-lb-shots" id="idx-lb-shots"></div>' +
+        '<div class="idx-lb-info" id="idx-lb-info"></div>' +
       '</div>';
     document.body.appendChild(lb);
 
@@ -2682,56 +2703,29 @@
       document.body.style.overflow = '';
     }
 
-    function openLb(card){
-      const banner  = card.querySelector('.project-banner');
-      const imgs    = banner ? banner.querySelectorAll('img') : [];
-      const shotImg = imgs[0]; // background screenshot
-      const iconImg = imgs[1]; // app icon
-
-      const name  = (card.querySelector('.project-name')  || {}).textContent || '';
-      const sub   = (card.querySelector('.project-subtitle') || {}).textContent || '';
-      const desc  = (card.querySelector('.project-desc')  || {}).innerHTML   || '';
-      const tech  = (card.querySelector('.project-tech')  || {}).innerHTML   || '';
-      const links = (card.querySelector('.project-links') || {}).innerHTML   || '';
-      const bg    = banner ? banner.style.background : '';
-
-      // Use a larger shot URL where possible (play-lh supports =w1080, mzstatic supports 750x1334)
-      let shotSrc = shotImg ? shotImg.src : '';
-      if(shotSrc){
-        shotSrc = shotSrc.replace(/=w\d+$/, '=w1080');            // Google Play
-        shotSrc = shotSrc.replace(/\/(\d+)x(\d+)bb\.jpg/, '/750x1334bb.jpg'); // Apple
-      }
-
-      const bannerEl = document.getElementById('idx-lb-banner');
-      bannerEl.style.background = bg;
-      bannerEl.innerHTML =
-        (shotSrc  ? '<img src="'+shotSrc+'" alt="'+name+' screenshot" class="idx-lb-shot">' : '') +
-        (iconImg  ? '<img src="'+iconImg.src+'" alt="'+name+' icon" class="idx-lb-icon">'   : '');
-
-      document.getElementById('idx-lb-name').textContent  = name;
-      document.getElementById('idx-lb-sub').textContent   = sub;
-      document.getElementById('idx-lb-desc').innerHTML    = desc;
-      document.getElementById('idx-lb-tech').innerHTML    = tech;
-      document.getElementById('idx-lb-links').innerHTML   = links;
-
+    function openLb(a){
+      document.getElementById('idx-lb-name').textContent = a.title;
+      document.getElementById('idx-lb-shots').innerHTML = a.shots.map(function(s){
+        return '<div class="idx-lb-shot"><img src="'+s+'" alt="'+a.title+'" loading="lazy"></div>';
+      }).join('');
+      document.getElementById('idx-lb-info').innerHTML = a.tech.map(function(t){
+        return '<span class="tech-pill">'+t+'</span>';
+      }).join('');
       document.getElementById('idx-lb').classList.add('open');
       document.body.style.overflow = 'hidden';
-
-      // Make links inside lightbox open in new tab
-      document.querySelectorAll('#idx-lb-links a').forEach(function(a){
-        a.target = '_blank'; a.rel = 'noopener';
-      });
     }
 
     document.getElementById('idx-lb-close').addEventListener('click', closeLb);
-    document.getElementById('idx-lb-backdrop').addEventListener('click', closeLb);
+    document.getElementById('idx-lb').addEventListener('click', function(e){
+      if(e.target === document.getElementById('idx-lb')) closeLb();
+    });
     document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeLb(); });
 
-    document.querySelectorAll('.project-card').forEach(function(card){
+    document.querySelectorAll('.project-card').forEach(function(card, i){
       card.style.cursor = 'pointer';
       card.addEventListener('click', function(e){
-        if(e.target.closest('a')) return; // let store links pass through
-        openLb(card);
+        if(e.target.closest('a')) return;
+        if(IDX_APPS[i]) openLb(IDX_APPS[i]);
       });
     });
   })();
