@@ -69,8 +69,8 @@
 
     /* GRID */
     .app-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;padding:2.5rem 0 5rem}
-    @media(max-width:1080px){.app-grid{grid-template-columns:repeat(2,1fr) !important}}
-    @media(max-width:768px){.app-grid{grid-template-columns:1fr !important;gap:1rem;padding:1.5rem 0 4rem}}
+    @media(max-width:1080px){.app-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:768px){.app-grid{grid-template-columns:1fr;gap:1rem;padding:1.5rem 0 4rem}}
 
     /* APP CARD */
     .app-card{background:var(--sur);border:1px solid var(--bd);border-radius:var(--r);display:flex;flex-direction:column;transition:transform .4s cubic-bezier(.34,1.2,.64,1),border-color .28s,box-shadow .28s;cursor:pointer;max-width:100%;overflow:hidden}
@@ -136,33 +136,18 @@
     @keyframes shimmer{0%{left:-100%}100%{left:200%}}
 
     /* LIGHTBOX */
-    #lb{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.92);backdrop-filter:blur(20px);display:none;align-items:center;justify-content:center;padding:2rem;overflow-y:auto}
+    #lb{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.92);backdrop-filter:blur(20px);display:none;align-items:center;justify-content:center;padding:2rem}
     #lb.open{display:flex}
-    .lb-inner{max-width:900px;width:100%;position:relative;margin:auto}
-    .lb-close{position:absolute;top:-3rem;right:0;background:none;border:1px solid var(--bd2);border-radius:50%;width:34px;height:34px;display:grid;place-items:center;color:var(--tx2);cursor:pointer;transition:all .2s;z-index:10}
+    .lb-inner{max-width:900px;width:100%;position:relative}
+    .lb-close{position:absolute;top:-3rem;right:0;background:none;border:1px solid var(--bd2);border-radius:50%;width:34px;height:34px;display:grid;place-items:center;color:var(--tx2);cursor:pointer;transition:all .2s}
     .lb-close:hover{border-color:var(--cyan);color:var(--cyan)}
     .lb-app-name{font-family:var(--ff);font-size:1.3rem;font-weight:800;letter-spacing:-.04em;margin-bottom:1.2rem;text-align:center}
-    /* screenshot strip */
     .lb-shots{display:flex;gap:1rem;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:.5rem;scrollbar-width:none}
     .lb-shots::-webkit-scrollbar{display:none}
     .lb-shot{flex-shrink:0;width:calc(33.33% - .67rem);min-width:200px;border-radius:var(--r);overflow:hidden;scroll-snap-align:start;border:1px solid var(--bd2)}
     .lb-shot img{width:100%;display:block;max-height:560px;object-fit:cover;object-position:top}
-    /* private-card detail panel */
-    .lb-detail{background:var(--sur);border:1px solid var(--bd2);border-radius:var(--r);overflow:hidden}
-    .lb-detail-banner{height:160px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.6rem;position:relative;overflow:hidden}
-    .lb-detail-banner::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(2,187,229,.18) 0%,transparent 70%)}
-    .lb-detail-emoji{font-size:3.5rem;position:relative;z-index:1}
-    .lb-detail-badge{font-family:var(--fm);font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.15em;color:rgba(255,255,255,.45);position:relative;z-index:1}
-    .lb-detail-body{padding:1.5rem 2rem 2rem}
-    .lb-detail-sub{font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--cyan);margin-bottom:.8rem}
-    .lb-detail-desc{font-size:.9rem;color:var(--tx2);line-height:1.7;margin-bottom:1.2rem}
-    .lb-detail-features{list-style:none;padding:0;display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.4rem}
-    .lb-detail-features li{font-size:.82rem;color:var(--tx2);display:flex;align-items:flex-start;gap:.5rem;line-height:1.5}
-    .lb-detail-features li::before{content:'→';color:var(--cyan);flex-shrink:0;margin-top:.1rem}
-    .lb-detail-tech{display:flex;flex-wrap:wrap;gap:.4rem}
-    /* shared bottom info row */
     .lb-info{margin-top:1.2rem;display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center}
-    @media(max-width:768px){.lb-shot{width:80vw}.lb-inner{padding:0}.lb-detail-body{padding:1rem 1.2rem 1.5rem}}
+    @media(max-width:768px){.lb-shot{width:80vw}.lb-inner{padding:0}}
 
     /* REVEAL */
     .rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
@@ -212,7 +197,7 @@
       .nav-count{font-size:.58rem;padding:.18rem .5rem}
 
       /* Grid */
-      .app-grid{grid-template-columns:1fr !important;gap:.9rem;padding:1.8rem 0 3.5rem}
+      .app-grid{grid-template-columns:1fr;gap:.9rem;padding:1.8rem 0 3.5rem}
 
       /* Card image */
       .card-img{height:170px;flex-shrink:0}
@@ -359,7 +344,6 @@
     <button class="lb-close" id="lb-close"><i class="fa-solid fa-xmark"></i></button>
     <div class="lb-app-name" id="lb-name"></div>
     <div class="lb-shots" id="lb-shots"></div>
-    <div class="lb-detail" id="lb-detail" style="display:none"></div>
     <div class="lb-info" id="lb-info"></div>
   </div>
 </div>
@@ -646,58 +630,30 @@ document.querySelectorAll('.ftab').forEach(btn=>{
 });
 
 /* ─── LIGHTBOX ───────────────────────────────────── */
-function closeLb(){
-  document.getElementById('lb').classList.remove('open');
-  document.body.style.overflow='';
-}
-function openLb(a){
-  document.getElementById('lb-name').textContent = a.title;
-  const hasShots = a.shots && a.shots.length > 0;
-  if(hasShots){
-    // Screenshot lightbox
+document.querySelectorAll('.app-card').forEach((card, i)=>{
+  card.addEventListener('click', ()=>{
+    const a = APPS[parseInt(card.dataset.idx)];
+    if(!a.shots || a.shots.length===0) return;
+    document.getElementById('lb-name').textContent = a.title;
     document.getElementById('lb-shots').innerHTML = a.shots.map(s=>
       `<div class="lb-shot"><img src="${s}" alt="${a.title}" loading="lazy"></div>`
     ).join('');
-    document.getElementById('lb-shots').style.display='flex';
-    document.getElementById('lb-detail').innerHTML='';
-    document.getElementById('lb-detail').style.display='none';
     document.getElementById('lb-info').innerHTML = a.tech.map(t=>`<span class="tech-c">${t}</span>`).join('');
-    document.getElementById('lb-info').style.display='flex';
-  } else {
-    // Private/special card detail panel
-    document.getElementById('lb-shots').innerHTML='';
-    document.getElementById('lb-shots').style.display='none';
-    document.getElementById('lb-info').style.display='none';
-    const featuresHtml = a.features && a.features.length
-      ? `<ul class="lb-detail-features">${a.features.map(f=>`<li>${f}</li>`).join('')}</ul>` : '';
-    document.getElementById('lb-detail').innerHTML=`
-      <div class="lb-detail-banner" style="background:${a.bg||'var(--sur2)'}">
-        <div class="lb-detail-emoji">${a.emoji||'📱'}</div>
-        <div class="lb-detail-badge">${a.badge||'Private App'}</div>
-      </div>
-      <div class="lb-detail-body">
-        <div class="lb-detail-sub">${a.sub}</div>
-        <p class="lb-detail-desc">${a.desc}</p>
-        ${featuresHtml}
-        <div class="lb-detail-tech">${a.tech.map(t=>`<span class="tech-c">${t}</span>`).join('')}</div>
-      </div>`;
-    document.getElementById('lb-detail').style.display='block';
-  }
-  document.getElementById('lb').classList.add('open');
-  document.body.style.overflow='hidden';
-}
-
-document.querySelectorAll('.app-card').forEach(card=>{
-  card.addEventListener('click', ()=>{
-    const a = APPS[parseInt(card.dataset.idx)];
-    openLb(a);
+    document.getElementById('lb').classList.add('open');
+    document.body.style.overflow='hidden';
   });
 });
-document.getElementById('lb-close').addEventListener('click', closeLb);
-document.getElementById('lb').addEventListener('click', e=>{
-  if(e.target===document.getElementById('lb')) closeLb();
+document.getElementById('lb-close').addEventListener('click',()=>{
+  document.getElementById('lb').classList.remove('open');
+  document.body.style.overflow='';
 });
-document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeLb(); });
+document.getElementById('lb').addEventListener('click', e=>{
+  if(e.target===document.getElementById('lb')){
+    document.getElementById('lb').classList.remove('open');
+    document.body.style.overflow='';
+  }
+});
+document.addEventListener('keydown', e=>{ if(e.key==='Escape'){ document.getElementById('lb').classList.remove('open'); document.body.style.overflow=''; }});
 
 /* ─── COUNTERS ───────────────────────────────────── */
 function countTo(el,to,dur=1400){
